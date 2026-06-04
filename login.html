@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Estadías Zacatecas</title>
+</head>
+<body>
+
+    <h1>Iniciar sesión</h1>
+
+    <label>Correo:</label>
+    <input type="email" id="correo" placeholder="tucorreo@gmail.com">
+
+    <br><br>
+
+    <label>Contraseña:</label>
+    <input type="password" id="password" placeholder="Contraseña">
+
+    <br><br>
+
+    <button onclick="login()">Entrar</button>
+
+    <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+
+    <p id="mensaje"></p>
+
+    <script>
+        function login() {
+            const correo = document.getElementById('correo').value;
+            const password = document.getElementById('password').value;
+
+            if (!correo || !password) {
+                document.getElementById('mensaje').textContent = 'Por favor llena todos los campos.';
+                return;
+            }
+
+            if (!correo.includes('@')) {
+                document.getElementById('mensaje').textContent = 'El correo no es válido.';
+                return;
+            }
+
+            if (password.length < 8) {
+                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos 8 caracteres.';
+                return;
+            }
+
+            if (!/[A-Z]/.test(password)) {
+                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos una mayúscula.';
+                return;
+            }
+
+            if (!/[0-9]/.test(password)) {
+                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos un número.';
+                return;
+            }
+
+            document.getElementById('mensaje').textContent = '¡Bienvenido!';
+        }
+    </script>
+
+</body>
+</html>

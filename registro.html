@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Estadías Zacatecas</title>
+</head>
+<body>
+
+    <h1>Crear cuenta</h1>
+
+    <label>¿Eres alumno o empresa?</label>
+    <select id="tipo" onchange="cambiarFormulario()">
+        <option value="alumno">Alumno</option>
+        <option value="empresa">Empresa</option>
+    </select>
+
+    <br><br>
+
+    <label>Nombre:</label>
+    <input type="text" id="nombre" placeholder="Tu nombre completo">
+
+    <br><br>
+
+    <label>Correo:</label>
+    <input type="email" id="correo" placeholder="tucorreo@gmail.com">
+
+    <br><br>
+
+    <label>Contraseña:</label>
+    <input type="password" id="password" placeholder="Contraseña">
+
+    <br><br>
+
+    <!-- Campos solo para alumnos -->
+    <div id="camposAlumno">
+        <label>Universidad:</label>
+        <input type="text" id="universidad" placeholder="Nombre de tu universidad">
+        <br><br>
+        <label>Carrera:</label>
+        <input type="text" id="carrera" placeholder="Tu carrera">
+        <br><br>
+    </div>
+
+    <!-- Campos solo para empresas -->
+    <div id="camposEmpresa" style="display:none">
+        <label>Giro del negocio:</label>
+        <input type="text" id="giro" placeholder="Ej. Tecnología, Salud, Comercio">
+        <br><br>
+        <label>Dirección:</label>
+        <input type="text" id="direccion" placeholder="Dirección de la empresa">
+        <br><br>
+    </div>
+
+    <button onclick="registrar()">Registrarse</button>
+
+    <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+
+    <p id="mensaje"></p>
+
+    <script>
+        function cambiarFormulario() {
+            const tipo = document.getElementById('tipo').value;
+            if (tipo === 'alumno') {
+                document.getElementById('camposAlumno').style.display = 'block';
+                document.getElementById('camposEmpresa').style.display = 'none';
+            } else {
+                document.getElementById('camposAlumno').style.display = 'none';
+                document.getElementById('camposEmpresa').style.display = 'block';
+            }
+        }
+
+        function registrar() {
+            const tipo = document.getElementById('tipo').value;
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const password = document.getElementById('password').value;
+
+            if (!nombre || !correo || !password) {
+                document.getElementById('mensaje').textContent = 'Por favor llena todos los campos.';
+                return;
+            }
+
+            if (!correo.includes('@')) {
+                document.getElementById('mensaje').textContent = 'El correo no es válido, debe tener @.';
+                return;
+            }
+
+            if (password.length < 8) {
+                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos 8 caracteres.';
+                return;
+            }
+
+            if (!/[A-Z]/.test(password)) {
+                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos una mayúscula.';
+                return;
+            }
+
+            if (!/[0-9]/.test(password)) {
+                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos un número.';
+                return;
+            }
+
+            document.getElementById('mensaje').textContent = '¡Cuenta creada exitosamente!';
+        }
+    </script>
+
+</body>
+</html>

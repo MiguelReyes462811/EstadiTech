@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacantes - Estadías Zacatecas</title>
+</head>
+<body>
+
+    <h1>Estadías disponibles</h1>
+
+    <label>Buscar por carrera:</label>
+    <select id="filtroCarrera" onchange="filtrar()">
+        <option value="todas">Todas</option>
+        <option value="TI">Tecnologías de la Información</option>
+        <option value="administracion">Administración</option>
+        <option value="contabilidad">Contabilidad</option>
+        <option value="mecanica">Mecánica</option>
+    </select>
+
+    <br><br>
+
+    <div id="listaVacantes">
+
+        <div class="vacante" data-carrera="TI">
+            <h2>Desarrollador Web</h2>
+            <p><b>Empresa:</b> Tech Zacatecas</p>
+            <p><b>Carrera:</b> Tecnologías de la Información</p>
+            <p><b>Descripción:</b> Apoyo en desarrollo de páginas web y sistemas.</p>
+            <p><b>Lugares disponibles:</b> 2</p>
+            <button onclick="aplicar('Desarrollador Web')">Aplicar</button>
+            <hr>
+        </div>
+
+        <div class="vacante" data-carrera="administracion">
+            <h2>Asistente Administrativo</h2>
+            <p><b>Empresa:</b> Comercial Zacatecas</p>
+            <p><b>Carrera:</b> Administración</p>
+            <p><b>Descripción:</b> Apoyo en gestión de documentos y atención a clientes.</p>
+            <p><b>Lugares disponibles:</b> 3</p>
+            <button onclick="aplicar('Asistente Administrativo')">Aplicar</button>
+            <hr>
+        </div>
+
+        <div class="vacante" data-carrera="TI">
+            <h2>Soporte Técnico</h2>
+            <p><b>Empresa:</b> Sistemas del Norte</p>
+            <p><b>Carrera:</b> Tecnologías de la Información</p>
+            <p><b>Descripción:</b> Mantenimiento de equipos y soporte a usuarios.</p>
+            <p><b>Lugares disponibles:</b> 1</p>
+            <button onclick="aplicar('Soporte Técnico')">Aplicar</button>
+            <hr>
+        </div>
+
+    </div>
+
+    <p id="mensaje"></p>
+
+    <br>
+    <a href="index.html">← Volver al inicio</a>
+
+    <script>
+        function filtrar() {
+            const carrera = document.getElementById('filtroCarrera').value;
+            const vacantes = document.querySelectorAll('.vacante');
+
+            vacantes.forEach(vacante => {
+                if (carrera === 'todas' || vacante.dataset.carrera === carrera) {
+                    vacante.style.display = 'block';
+                } else {
+                    vacante.style.display = 'none';
+                }
+            });
+        }
+
+        function aplicar(puesto) {
+            document.getElementById('mensaje').textContent = '¡Aplicaste a ' + puesto + ' exitosamente!';
+        }
+    </script>
+
+</body>
+</html>
