@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Estadía - EstadiTech</title>
+</head>
+<body>
+
+    <h1>Publicar estadía</h1>
+
+    <label>Puesto:</label>
+    <input type="text" id="puesto" placeholder="Ej. Desarrollador Web, Soporte Técnico">
+
+    <br><br>
+
+    <label>Descripción:</label>
+    <textarea id="descripcion" placeholder="Describe las actividades que hará el estudiante" rows="4" cols="40"></textarea>
+
+    <br><br>
+
+    <label>Carrera solicitada:</label>
+    <select id="carrera">
+        <option value="TI">Tecnologías de la Información</option>
+        <option value="administracion">Administración</option>
+        <option value="contabilidad">Contabilidad</option>
+        <option value="mecanica">Mecánica</option>
+    </select>
+
+    <br><br>
+
+    <label>Lugares disponibles:</label>
+    <input type="number" id="lugares" min="1" max="10" placeholder="¿Cuántos estudiantes aceptas?">
+
+    <br><br>
+
+    <label>Contacto:</label>
+    <input type="email" id="contacto" placeholder="correo@empresa.com">
+
+    <br><br>
+
+    <button onclick="publicar()">Publicar estadía</button>
+
+    <p id="mensaje"></p>
+
+    <br>
+    <a href="index.html">← Volver al inicio</a>
+
+    <script>
+        function publicar() {
+            const puesto = document.getElementById('puesto').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const lugares = document.getElementById('lugares').value;
+            const contacto = document.getElementById('contacto').value;
+
+            if (!puesto || !descripcion || !lugares || !contacto) {
+                document.getElementById('mensaje').textContent = 'Por favor llena todos los campos.';
+                return;
+            }
+
+            if (!contacto.includes('@')) {
+                document.getElementById('mensaje').textContent = 'El correo de contacto no es válido.';
+                return;
+            }
+
+            document.getElementById('mensaje').textContent = '¡Estadía publicada exitosamente!';
+        }
+    </script>
+
+</body>
+</html>

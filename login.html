@@ -3,59 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Estadías Zacatecas</title>
+    <title>Registro - EstadiTech</title>
 </head>
 <body>
 
-    <h1>Iniciar sesión</h1>
+    <h1>Crear cuenta</h1>
 
-    <label>Correo:</label>
-    <input type="email" id="correo" placeholder="tucorreo@gmail.com">
-
-    <br><br>
-
-    <label>Contraseña:</label>
-    <input type="password" id="password" placeholder="Contraseña">
+    <label>¿Eres alumno o empresa?</label>
+    <select id="tipo" onchange="cambiarFormulario()">
+        <option value="alumno">Alumno</option>
+        <option value="empresa">Empresa</option>
+    </select>
 
     <br><br>
 
-    <button onclick="login()">Entrar</button>
+    <!-- Campos para alumnos -->
+    <div id="camposAlumno">
 
-    <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+        <label>Correo institucional:</label>
+        <input type="email" id="correoAlumno" placeholder="tucorreo@utzac.edu.mx">
+        <br><br>
+
+        <label>Contraseña:</label>
+        <input type="password" id="passwordAlumno" placeholder="Contraseña">
+        <br><br>
+
+        <label>Nombre(s):</label>
+        <input type="text" id="nombreAlumno" placeholder="Tu nombre">
+        <br><br>
+
+        <label>Apellidos:</label>
+        <input type="text" id="apellidosAlumno" placeholder="Tus apellidos">
+        <br><br>
+
+        <label>Carrera:</label>
+        <select id="carreraAlumno">
+            <option value="TI">Tecnologías de la Información</option>
+            <option value="administracion">Administración</option>
+            <option value="contabilidad">Contabilidad</option>
+            <option value="mecanica">Mecánica</option>
+        </select>
+        <br><br>
+
+        <label>Especialidad:</label>
+        <input type="text" id="especialidad" placeholder="Tu especialidad">
+        <br><br>
+
+        <label>Licencias:</label>
+        <input type="text" id="licencias" placeholder="Ej. Licencia de conducir, AWS">
+        <br><br>
+
+        <label>Certificaciones:</label>
+        <input type="text" id="certificaciones" placeholder="Ej. CCNA, Microsoft">
+        <br><br>
+
+        <label>Idiomas:</label>
+        <input type="text" id="idiomas" placeholder="Ej. Español, Inglés">
+        <br><br>
+
+        <label>Habilidades:</label>
+        <textarea id="habilidades" placeholder="Describe tus habilidades" rows="3" cols="40"></textarea>
+        <br><br>
+
+        <label>Subir CV:</label>
+        <input type="file" id="cv" accept=".pdf,.doc,.docx">
+        <br><br>
+
+    </div>
+
+    <!-- Campos para empresas -->
+    <div id="camposEmpresa" style="display:none">
+
+        <label>Correo:</label>
+        <input type="email" id="correoEmpresa" placeholder="correo@empresa.com">
+        <br><br>
+
+        <label>Contraseña:</label>
+        <input type="password" id="passwordEmpresa" placeholder="Contraseña">
+        <br><br>
+
+        <label>Nombre(s):</label>
+        <input type="text" id="nombreEmpresa" placeholder="Nombre del responsable">
+        <br><br>
+
+        <label>Apellidos:</label>
+        <input type="text" id="apellidosEmpresa" placeholder="Apellidos del responsable">
+        <br><br>
+
+        <label>Nombre de empresa:</label>
+        <input type="text" id="nombreEmpresaRazon" placeholder="Razón social o nombre comercial">
+        <br><br>
+
+        <label>Carreras afines:</label>
+        <input type="text" id="carrerasAfines" placeholder="Ej. TI, Administración">
+        <br><br>
+
+        <label>Dirección:</label>
+        <input type="text" id="direccion" placeholder="Dirección de la empresa">
+        <br><br>
+
+        <label>Número de vacantes:</label>
+        <input type="number" id="numVacantes" min="1" placeholder="¿Cuántas vacantes tienes?">
+        <br><br>
+
+        <label>Subir convocatoria:</label>
+        <input type="file" id="convocatoria" accept=".pdf,.doc,.docx">
+        <br><br>
+
+    </div>
+
+    <button onclick="registrar()">Registrarse</button>
+
+    <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
 
     <p id="mensaje"></p>
 
     <script>
-        function login() {
-            const correo = document.getElementById('correo').value;
-            const password = document.getElementById('password').value;
+        function cambiarFormulario() {
+            const tipo = document.getElementById('tipo').value;
+            if (tipo === 'alumno') {
+                document.getElementById('camposAlumno').style.display = 'block';
+                document.getElementById('camposEmpresa').style.display = 'none';
+            } else {
+                document.getElementById('camposAlumno').style.display = 'none';
+                document.getElementById('camposEmpresa').style.display = 'block';
+            }
+        }
 
-            if (!correo || !password) {
-                document.getElementById('mensaje').textContent = 'Por favor llena todos los campos.';
-                return;
+        function registrar() {
+            const tipo = document.getElementById('tipo').value;
+
+            if (tipo === 'alumno') {
+                const correo = document.getElementById('correoAlumno').value;
+                const password = document.getElementById('passwordAlumno').value;
+                const nombre = document.getElementById('nombreAlumno').value;
+                const apellidos = document.getElementById('apellidosAlumno').value;
+
+                if (!correo || !password || !nombre || !apellidos) {
+                    document.getElementById('mensaje').textContent = 'Por favor llena todos los campos obligatorios.';
+                    return;
+                }
+
+                if (!correo.includes('@')) {
+                    document.getElementById('mensaje').textContent = 'El correo no es válido.';
+                    return;
+                }
+
+                if (password.length < 8) {
+                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos 8 caracteres.';
+                    return;
+                }
+
+                if (!/[A-Z]/.test(password)) {
+                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos una mayúscula.';
+                    return;
+                }
+
+                if (!/[0-9]/.test(password)) {
+                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos un número.';
+                    return;
+                }
+
+            } else {
+                const correo = document.getElementById('correoEmpresa').value;
+                const password = document.getElementById('passwordEmpresa').value;
+                const nombre = document.getElementById('nombreEmpresa').value;
+                const apellidos = document.getElementById('apellidosEmpresa').value;
+                const nombreEmpresa = document.getElementById('nombreEmpresaRazon').value;
+
+                if (!correo || !password || !nombre || !apellidos || !nombreEmpresa) {
+                    document.getElementById('mensaje').textContent = 'Por favor llena todos los campos obligatorios.';
+                    return;
+                }
+
+                if (!correo.includes('@')) {
+                    document.getElementById('mensaje').textContent = 'El correo no es válido.';
+                    return;
+                }
+
+                if (password.length < 8) {
+                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos 8 caracteres.';
+                    return;
+                }
+
+                if (!/[A-Z]/.test(password)) {
+                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos una mayúscula.';
+                    return;
+                }
+
+                if (!/[0-9]/.test(password)) {
+                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos un número.';
+                    return;
+                }
             }
 
-            if (!correo.includes('@')) {
-                document.getElementById('mensaje').textContent = 'El correo no es válido.';
-                return;
-            }
-
-            if (password.length < 8) {
-                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos 8 caracteres.';
-                return;
-            }
-
-            if (!/[A-Z]/.test(password)) {
-                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos una mayúscula.';
-                return;
-            }
-
-            if (!/[0-9]/.test(password)) {
-                document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos un número.';
-                return;
-            }
-
-            document.getElementById('mensaje').textContent = '¡Bienvenido!';
+            document.getElementById('mensaje').textContent = '¡Cuenta creada exitosamente!';
         }
     </script>
 
