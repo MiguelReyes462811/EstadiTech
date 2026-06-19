@@ -135,7 +135,7 @@
     <main>
         <div class="form-box">
             <h1>Publicar estadía</h1>
-            <p class="subtitulo">Comparte tus oportunidades con los estudiantes UTZAC</p>
+            <p class="subtitulo">Comparte tus oportunidades con los estudiantes</p>
 
             <label for="puesto">Puesto:</label>
             <input type="text" id="puesto" placeholder="Ej. Desarrollador Web, Asistente Administrativo">
@@ -145,13 +145,12 @@
 
             <label for="carrera">Carrera solicitada:</label>
             <select id="carrera">
-                <option value="administracion">Administración de empresas</option>
+                <option value="administración">Administración de empresas</option>
                 <option value="agricultura">Agricultura</option>
                 <option value="contaduria">Contaduría</option>
                 <option value="educacion">Educación</option>
                 <option value="energia">Energía y Desarrollo Sostenible</option>
                 <option value="fisioterapia">Fisioterapia</option>
-                <option value="industrial">Ingeniería Industrial</option>
                 <option value="mantenimiento">Mantenimiento Industrial</option>
                 <option value="mecatronica">Mecatrónica</option>
                 <option value="mineria">Minería</option>
@@ -162,14 +161,14 @@
             <label for="lugares">Lugares disponibles:</label>
             <input type="number" id="lugares" min="1" max="10" placeholder="¿Cuántos estudiantes aceptas?">
 
-            <label for="contacto">Contacto:</label>
+            <label for="contacto">Contacto de la empresa contratante:</label>
             <input type="email" id="contacto" placeholder="correo@empresa.com">
 
             <button onclick="publicar()">Publicar estadía</button>
 
             <p id="mensaje"></p>
 
-            <a href="index.html" class="volver">← Volver al inicio</a>
+            <a href="index.html" class="volver"> ← Volver al inicio </a>
         </div>
     </main>
 
@@ -181,12 +180,12 @@
             const contacto = document.getElementById('contacto').value;
 
             if (!puesto || !descripcion || !lugares || !contacto) {
-                document.getElementById('mensaje').textContent = 'Por favor llena todos los campos.';
+                document.getElementById('mensaje').textContent = 'Por favor completa todos los campos.';
                 return;
             }
 
             if (!contacto.includes('@')) {
-                document.getElementById('mensaje').textContent = 'El correo de contacto no es válido.';
+                document.getElementById('mensaje').textContent = 'El correo que ingresaste no es válido.';
                 return;
             }
 
