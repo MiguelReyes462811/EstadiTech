@@ -1,206 +1,422 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Registro - EstadiTech</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos.css" />
+    <style>
+        /* Barra superior */
+        header {
+            background-color: #2c7be5;
+            color: white;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header img {
+            width: 100px;
+            height: auto;
+        }
+
+        .slogan {
+            font-size: 15px;
+            font-weight: 500;
+            opacity: 0.95;
+            animation: mover 6s infinite alternate, fade 3s infinite alternate;
+        }
+
+        @keyframes mover {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(18px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes fade {
+            0% { opacity: 0.75; }
+            100% { opacity: 1; }
+        }
+
+        /* Layout principal */
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: #fafafa;
+            margin: 0;
+            color: #222;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 36px 16px;
+        }
+
+        /* Caja del formulario */
+        .form-box {
+            background-color: #ffffff;
+            padding: 26px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(20,30,60,0.06);
+            max-width: 760px;
+            width: 100%;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .form-box h1 {
+            font-size: 22px;
+            color: #2c7be5;
+            margin: 0;
+        }
+
+        .form-box p.subtitulo {
+            font-size: 14px;
+            color: #555;
+            margin: 6px 0 0 0;
+        }
+
+        /* Grid para campos */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px 18px;
+            margin-top: 18px;
+        }
+
+        /* Para campos que ocupan toda la fila */
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        select,
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d6d6d6;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        textarea { resize: vertical; min-height: 84px; }
+
+        /* Botón principal */
+        .actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .primary-btn {
+            background-color: #2c7be5;
+            color: #fff;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(42, 99, 200, 0.18);
+        }
+
+        .primary-btn:hover { background-color: #1a5bbf; }
+
+        .link-row {
+            font-size: 14px;
+            color: #444;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .link-row a { color: #2c7be5; text-decoration: none; font-weight: 600; }
+
+        #mensaje {
+            margin-top: 10px;
+            font-weight: 700;
+            color: #1b7a2a;
+            text-align: center;
+        }
+
+        /* Ocultar/mostrar secciones */
+        .hidden { display: none; }
+
+        /* Responsive */
+        @media (max-width: 720px) {
+            .grid { grid-template-columns: 1fr; }
+            header { padding: 12px; }
+            .form-box { padding: 18px; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Crear cuenta</h1>
+    <!-- Barra superior -->
+    <header>
+        <img src="EstadiTech.png" alt="Logo EstadiTech">
+        <div class="slogan">Buscamos talentos UTZAC y los canalizamos con empresas</div>
+    </header>
 
-    <label>¿Eres alumno o empresa?</label>
-    <select id="tipo" onchange="cambiarFormulario()">
-        <option value="alumno">Alumno</option>
-        <option value="empresa">Empresa</option>
-    </select>
+    <main>
+        <div class="form-box">
+            <div class="form-header">
+                <h1>Crear cuenta</h1>
+                <p class="subtitulo">Regístrate como alumno o empresa para acceder a EstadiTech</p>
+            </div>
 
-    <br><br>
+            <div class="grid">
+                <div class="full">
+                    <label for="tipo">¿Eres alumno o empresa?</label>
+                    <select id="tipo" onchange="cambiarFormulario()">
+                        <option value="alumno">Alumno</option>
+                        <option value="empresa">Empresa</option>
+                    </select>
+                </div>
 
-    <!-- Campos para alumnos -->
-    <div id="camposAlumno">
+                <!-- Campos para alumnos -->
+                <div id="camposAlumno">
+                    <div class="grid">
+                        <div>
+                            <label for="correoAlumno">Correo institucional</label>
+                            <input type="email" id="correoAlumno" placeholder="tucorreo@utzac.edu.mx">
+                        </div>
 
-        <label>Correo institucional:</label>
-        <input type="email" id="correoAlumno" placeholder="tucorreo@utzac.edu.mx">
-        <br><br>
+                        <div>
+                            <label for="passwordAlumno">Contraseña</label>
+                            <input type="password" id="passwordAlumno" placeholder="Contraseña">
+                        </div>
 
-        <label>Contraseña:</label>
-        <input type="password" id="passwordAlumno" placeholder="Contraseña">
-        <br><br>
+                        <div>
+                            <label for="nombreAlumno">Nombre(s)</label>
+                            <input type="text" id="nombreAlumno" placeholder="Tu nombre">
+                        </div>
 
-        <label>Nombre(s):</label>
-        <input type="text" id="nombreAlumno" placeholder="Tu nombre">
-        <br><br>
+                        <div>
+                            <label for="apellidosAlumno">Apellidos</label>
+                            <input type="text" id="apellidosAlumno" placeholder="Tus apellidos">
+                        </div>
 
-        <label>Apellidos:</label>
-        <input type="text" id="apellidosAlumno" placeholder="Tus apellidos">
-        <br><br>
+                        <div>
+                            <label for="carreraAlumno">Carrera</label>
+                            <select id="carreraAlumno">
+                                <option value="administracion">Administración de empresas</option>
+                                <option value="agricultura">Agricultura</option>
+                                <option value="contaduria">Contaduría</option>
+                                <option value="educacion">Educación</option>
+                                <option value="energia">Energía y Desarrollo Sostenible</option>
+                                <option value="fisioterapia">Fisioterapia</option>
+                                <option value="industrial">Ingeniería Industrial</option>
+                                <option value="mantenimiento">Mantenimiento Industrial</option>
+                                <option value="mecatronica">Mecatrónica</option>
+                                <option value="mineria">Minería</option>
+                                <option value="mercadotecnia">Negocios y Mercadotecnia</option>
+                                <option value="TI">Tecnologías de la Información</option>
+                            </select>
+                        </div>
 
-        <label>Carrera:</label>
-        <select id="carreraAlumno">
-            <option value="TI">Tecnologías de la Información</option>
-            <option value="administracion">Administración</option>
-            <option value="contabilidad">Contabilidad</option>
-            <option value="mecanica">Mecánica</option>
-        </select>
-        <br><br>
+                        <div>
+                            <label for="especialidad">Especialidad</label>
+                            <input type="text" id="especialidad" placeholder="Tu especialidad (opcional)">
+                        </div>
 
-        <label>Especialidad:</label>
-        <input type="text" id="especialidad" placeholder="Tu especialidad">
-        <br><br>
+                        <div>
+                            <label for="licencias">Licencias</label>
+                            <input type="text" id="licencias" placeholder="Ej. Licencia de conducir, AWS">
+                        </div>
 
-        <label>Licencias:</label>
-        <input type="text" id="licencias" placeholder="Ej. Licencia de conducir, AWS">
-        <br><br>
+                        <div>
+                            <label for="certificaciones">Certificaciones</label>
+                            <input type="text" id="certificaciones" placeholder="Ej. CCNA, Microsoft">
+                        </div>
 
-        <label>Certificaciones:</label>
-        <input type="text" id="certificaciones" placeholder="Ej. CCNA, Microsoft">
-        <br><br>
+                        <div class="full">
+                            <label for="idiomas">Idiomas</label>
+                            <input type="text" id="idiomas" placeholder="Ej. Español, Inglés">
+                        </div>
 
-        <label>Idiomas:</label>
-        <input type="text" id="idiomas" placeholder="Ej. Español, Inglés">
-        <br><br>
+                        <div class="full">
+                            <label for="habilidades">Habilidades</label>
+                            <textarea id="habilidades" placeholder="Describe tus habilidades (opcional)"></textarea>
+                        </div>
 
-        <label>Habilidades:</label>
-        <textarea id="habilidades" placeholder="Describe tus habilidades" rows="3" cols="40"></textarea>
-        <br><br>
+                        <div class="full">
+                            <label for="cv">Subir CV</label>
+                            <input type="file" id="cv" accept=".pdf,.doc,.docx">
+                        </div>
+                    </div>
+                </div>
 
-        <label>Subir CV:</label>
-        <input type="file" id="cv" accept=".pdf,.doc,.docx">
-        <br><br>
+                <!-- Campos para empresas -->
+                <div id="camposEmpresa" class="hidden">
+                    <div class="grid">
+                        <div>
+                            <label for="correoEmpresa">Correo</label>
+                            <input type="email" id="correoEmpresa" placeholder="correo@empresa.com">
+                        </div>
 
-    </div>
+                        <div>
+                            <label for="passwordEmpresa">Contraseña</label>
+                            <input type="password" id="passwordEmpresa" placeholder="Contraseña">
+                        </div>
 
-    <!-- Campos para empresas -->
-    <div id="camposEmpresa" style="display:none">
+                        <div>
+                            <label for="nombreEmpresa">Nombre(s) del responsable</label>
+                            <input type="text" id="nombreEmpresa" placeholder="Nombre del responsable">
+                        </div>
 
-        <label>Correo:</label>
-        <input type="email" id="correoEmpresa" placeholder="correo@empresa.com">
-        <br><br>
+                        <div>
+                            <label for="apellidosEmpresa">Apellidos del responsable</label>
+                            <input type="text" id="apellidosEmpresa" placeholder="Apellidos del responsable">
+                        </div>
 
-        <label>Contraseña:</label>
-        <input type="password" id="passwordEmpresa" placeholder="Contraseña">
-        <br><br>
+                        <div class="full">
+                            <label for="nombreEmpresaRazon">Nombre de empresa</label>
+                            <input type="text" id="nombreEmpresaRazon" placeholder="Razón social o nombre comercial">
+                        </div>
 
-        <label>Nombre(s):</label>
-        <input type="text" id="nombreEmpresa" placeholder="Nombre del responsable">
-        <br><br>
+                        <div class="full">
+                            <label for="carrerasAfines">Carreras afines</label>
+                            <input type="text" id="carrerasAfines" placeholder="Ej. TI, Administración">
+                        </div>
 
-        <label>Apellidos:</label>
-        <input type="text" id="apellidosEmpresa" placeholder="Apellidos del responsable">
-        <br><br>
+                        <div>
+                            <label for="direccion">Dirección</label>
+                            <input type="text" id="direccion" placeholder="Dirección de la empresa">
+                        </div>
 
-        <label>Nombre de empresa:</label>
-        <input type="text" id="nombreEmpresaRazon" placeholder="Razón social o nombre comercial">
-        <br><br>
+                        <div>
+                            <label for="numVacantes">Número de vacantes</label>
+                            <input type="number" id="numVacantes" min="1" placeholder="¿Cuántas vacantes tienes?">
+                        </div>
 
-        <label>Carreras afines:</label>
-        <input type="text" id="carrerasAfines" placeholder="Ej. TI, Administración">
-        <br><br>
+                        <div class="full">
+                            <label for="convocatoria">Subir convocatoria</label>
+                            <input type="file" id="convocatoria" accept=".pdf,.doc,.docx">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <label>Dirección:</label>
-        <input type="text" id="direccion" placeholder="Dirección de la empresa">
-        <br><br>
-
-        <label>Número de vacantes:</label>
-        <input type="number" id="numVacantes" min="1" placeholder="¿Cuántas vacantes tienes?">
-        <br><br>
-
-        <label>Subir convocatoria:</label>
-        <input type="file" id="convocatoria" accept=".pdf,.doc,.docx">
-        <br><br>
-
-    </div>
-
-    <button onclick="registrar()">Registrarse</button>
-
-    <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a></p>
-
-    <p id="mensaje"></p>
+            <div class="actions">
+                <button class="primary-btn" onclick="registrar()">Registrarse</button>
+                <div class="link-row">
+                    ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
+                </div>
+                <div id="mensaje" role="status" aria-live="polite"></div>
+            </div>
+        </div>
+    </main>
 
     <script>
+        // Inicializa mostrando campos de alumno
+        document.addEventListener('DOMContentLoaded', () => {
+            cambiarFormulario();
+        });
+
         function cambiarFormulario() {
             const tipo = document.getElementById('tipo').value;
+            const alumno = document.getElementById('camposAlumno');
+            const empresa = document.getElementById('camposEmpresa');
+
             if (tipo === 'alumno') {
-                document.getElementById('camposAlumno').style.display = 'block';
-                document.getElementById('camposEmpresa').style.display = 'none';
+                alumno.classList.remove('hidden');
+                empresa.classList.add('hidden');
             } else {
-                document.getElementById('camposAlumno').style.display = 'none';
-                document.getElementById('camposEmpresa').style.display = 'block';
+                alumno.classList.add('hidden');
+                empresa.classList.remove('hidden');
             }
+
+            // Limpia mensaje al cambiar
+            document.getElementById('mensaje').textContent = '';
+        }
+
+        function validarContrasena(password) {
+            if (password.length < 8) return 'La contraseña debe tener al menos 8 caracteres.';
+            if (!/[A-Z]/.test(password)) return 'La contraseña debe tener al menos una mayúscula.';
+            if (!/[0-9]/.test(password)) return 'La contraseña debe tener al menos un número.';
+            return '';
         }
 
         function registrar() {
             const tipo = document.getElementById('tipo').value;
+            const mensajeEl = document.getElementById('mensaje');
+            mensajeEl.textContent = '';
 
             if (tipo === 'alumno') {
-                const correo = document.getElementById('correoAlumno').value;
+                const correo = document.getElementById('correoAlumno').value.trim();
                 const password = document.getElementById('passwordAlumno').value;
-                const nombre = document.getElementById('nombreAlumno').value;
-                const apellidos = document.getElementById('apellidosAlumno').value;
+                const nombre = document.getElementById('nombreAlumno').value.trim();
+                const apellidos = document.getElementById('apellidosAlumno').value.trim();
 
                 if (!correo || !password || !nombre || !apellidos) {
-                    document.getElementById('mensaje').textContent = 'Por favor llena todos los campos obligatorios.';
+                    mensajeEl.style.color = '#c0392b';
+                    mensajeEl.textContent = 'Por favor llena todos los campos obligatorios.';
                     return;
                 }
 
                 if (!correo.includes('@')) {
-                    document.getElementById('mensaje').textContent = 'El correo no es válido.';
+                    mensajeEl.style.color = '#c0392b';
+                    mensajeEl.textContent = 'El correo no es válido.';
                     return;
                 }
 
-                if (password.length < 8) {
-                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos 8 caracteres.';
-                    return;
-                }
-
-                if (!/[A-Z]/.test(password)) {
-                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos una mayúscula.';
-                    return;
-                }
-
-                if (!/[0-9]/.test(password)) {
-                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos un número.';
+                const passErr = validarContrasena(password);
+                if (passErr) {
+                    mensajeEl.style.color = '#c0392b';
+                    mensajeEl.textContent = passErr;
                     return;
                 }
 
             } else {
-                const correo = document.getElementById('correoEmpresa').value;
+                const correo = document.getElementById('correoEmpresa').value.trim();
                 const password = document.getElementById('passwordEmpresa').value;
-                const nombre = document.getElementById('nombreEmpresa').value;
-                const apellidos = document.getElementById('apellidosEmpresa').value;
-                const nombreEmpresa = document.getElementById('nombreEmpresaRazon').value;
+                const nombre = document.getElementById('nombreEmpresa').value.trim();
+                const apellidos = document.getElementById('apellidosEmpresa').value.trim();
+                const nombreEmpresa = document.getElementById('nombreEmpresaRazon').value.trim();
 
                 if (!correo || !password || !nombre || !apellidos || !nombreEmpresa) {
-                    document.getElementById('mensaje').textContent = 'Por favor llena todos los campos obligatorios.';
+                    mensajeEl.style.color = '#c0392b';
+                    mensajeEl.textContent = 'Por favor llena todos los campos obligatorios.';
                     return;
                 }
 
                 if (!correo.includes('@')) {
-                    document.getElementById('mensaje').textContent = 'El correo no es válido.';
+                    mensajeEl.style.color = '#c0392b';
+                    mensajeEl.textContent = 'El correo no es válido.';
                     return;
                 }
 
-                if (password.length < 8) {
-                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos 8 caracteres.';
-                    return;
-                }
-
-                if (!/[A-Z]/.test(password)) {
-                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos una mayúscula.';
-                    return;
-                }
-
-                if (!/[0-9]/.test(password)) {
-                    document.getElementById('mensaje').textContent = 'La contraseña debe tener al menos un número.';
+                const passErr = validarContrasena(password);
+                if (passErr) {
+                    mensajeEl.style.color = '#c0392b';
+                    mensajeEl.textContent = passErr;
                     return;
                 }
             }
 
-            document.getElementById('mensaje').textContent = '¡Cuenta creada exitosamente!';
+            mensajeEl.style.color = '#1b7a2a';
+            mensajeEl.textContent = '¡Cuenta creada exitosamente!';
         }
     </script>
-
 </body>
 </html>

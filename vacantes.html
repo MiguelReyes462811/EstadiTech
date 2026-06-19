@@ -1,82 +1,329 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vacantes - EstadiTech</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos.css" />
+    <style>
+        /* Barra movedISA */
+        header {
+            background-color: #2c7be5;
+            color: #fff;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header img {
+            width: 100px;
+            height: auto;
+        }
+
+        .slogan {
+            font-size: 15px;
+            font-weight: 500;
+            opacity: 0.95;
+            animation: mover 6s infinite alternate, fade 3s infinite alternate;
+        }
+
+        @keyframes mover {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(16px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes fade {
+            0% { opacity: 0.75; }
+            100% { opacity: 1; }
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: #fafafa;
+            margin: 0;
+            color: #222;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 36px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .page-header h1 {
+            font-size: 22px;
+            color: #2c7be5;
+            margin: 0;
+        }
+
+        .page-header p.sub {
+            margin: 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .controls select,
+        .controls input[type="search"] {
+            padding: 9px 12px;
+            border-radius: 8px;
+            border: 1px solid #d6d6d6;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .vacantes-box {
+            background: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(20,30,60,0.06);
+        }
+
+        .vacante {
+            padding: 14px 10px;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 160px;
+            gap: 12px;
+            align-items: start;
+            margin-bottom: 12px;
+            border: 1px solid #eef2f6;
+        }
+
+        .vacante h2 {
+            margin: 0 0 6px 0;
+            font-size: 18px;
+            color: #1b3a8a;
+        }
+
+        .vacante p {
+            margin: 4px 0;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .vacante .meta {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .vacante .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: stretch;
+        }
+
+        .btn-apply {
+            background-color: #2c7be5;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 6px 14px rgba(42, 99, 200, 0.12);
+        }
+
+        .btn-apply:hover { background-color: #1a5bbf; }
+
+        .vacante hr {
+            border: none;
+            border-top: 1px solid #eef2f6;
+            margin-top: 12px;
+        }
+
+        #mensaje {
+            margin-top: 12px;
+            font-weight: 700;
+            color: #1b7a2a;
+            text-align: center;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 14px;
+            color: #2c7be5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 28px;
+            color: #666;
+            font-size: 15px;
+        }
+
+        @media (max-width: 820px) {
+            .vacante {
+                grid-template-columns: 1fr;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .controls { width: 100%; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Estadías disponibles</h1>
+    <!-- Barra sup -->
+    <header>
+        <img src="EstadiTech.png" alt="Logo EstadiTech">
+        <div class="slogan">Buscamos talentos UTZAC y los canalizamos con empresas</div>
+    </header>
 
-    <label>Buscar por carrera:</label>
-    <select id="filtroCarrera" onchange="filtrar()">
-        <option value="todas">Todas</option>
-        <option value="TI">Tecnologías de la Información</option>
-        <option value="administracion">Administración</option>
-        <option value="contabilidad">Contabilidad</option>
-        <option value="mecanica">Mecánica</option>
-    </select>
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <div>
+                    <h1>Estadías disponibles</h1>
+                    <p class="sub">Filtra por carrera o busca una vacante específica</p>
+                </div>
 
-    <br><br>
+                <div class="controls">
+                    <label for="filtroCarrera" class="sr-only">Filtrar por carrera</label>
+                    <select id="filtroCarrera" onchange="filtrar()">
+                        <option value="todas">Todas</option>
+                        <option value="administracion">Administración de empresas</option>
+                        <option value="agricultura">Agricultura</option>
+                        <option value="contaduria">Contaduría</option>
+                        <option value="educacion">Educación</option>
+                        <option value="energia">Energía y Desarrollo Sostenible</option>
+                        <option value="fisioterapia">Fisioterapia</option>
+                        <option value="industrial">Ingeniería Industrial</option>
+                        <option value="mantenimiento">Mantenimiento Industrial</option>
+                        <option value="mecatronica">Mecatrónica</option>
+                        <option value="mineria">Minería</option>
+                        <option value="mercadotecnia">Negocios y Mercadotecnia</option>
+                        <option value="TI">Tecnologías de la Información</option>
+                    </select>
 
-    <div id="listaVacantes">
+                    <label for="buscarVacante" class="sr-only">Buscar vacante</label>
+                    <input type="search" id="buscarVacante" placeholder="Buscar por puesto, empresa..." oninput="filtrar()" />
+                </div>
+            </div>
 
-        <div class="vacante" data-carrera="TI">
-            <h2>Desarrollador Web</h2>
-            <p><b>Empresa:</b> Tech Zacatecas</p>
-            <p><b>Carrera:</b> Tecnologías de la Información</p>
-            <p><b>Descripción:</b> Apoyo en desarrollo de páginas web y sistemas.</p>
-            <p><b>Lugares disponibles:</b> 2</p>
-            <button onclick="aplicar('Desarrollador Web')">Aplicar</button>
-            <hr>
+            <div class="vacantes-box" id="listaVacantes">
+                <div class="vacante" data-carrera="TI">
+                    <div>
+                        <h2>Desarrollador Web</h2>
+                        <p class="meta"><strong>Empresa:</strong> Tech Zacatecas — <strong>Carrera:</strong> Tecnologías de la Información</p>
+                        <p><strong>Descripción:</strong> Apoyo en desarrollo de páginas web y sistemas.</p>
+                        <p class="meta"><strong>Lugares disponibles:</strong> 2</p>
+                        <hr>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-apply" onclick="aplicar('Desarrollador Web')">Aplicar</button>
+                    </div>
+                </div>
+
+                <div class="vacante" data-carrera="administracion">
+                    <div>
+                        <h2>Asistente Administrativo</h2>
+                        <p class="meta"><strong>Empresa:</strong> Comercial Zacatecas — <strong>Carrera:</strong> Administración</p>
+                        <p><strong>Descripción:</strong> Apoyo en gestión de documentos y atención a clientes.</p>
+                        <p class="meta"><strong>Lugares disponibles:</strong> 3</p>
+                        <hr>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-apply" onclick="aplicar('Asistente Administrativo')">Aplicar</button>
+                    </div>
+                </div>
+
+
+                <div class="vacante" data-carrera="TI">
+                    <div>
+                        <h2>Soporte Técnico</h2>
+                        <p class="meta"><strong>Empresa:</strong> Sistemas del Norte — <strong>Carrera:</strong> Tecnologías de la Información</p>
+                        <p><strong>Descripción:</strong> Mantenimiento de equipos y soporte a usuarios.</p>
+                        <p class="meta"><strong>Lugares disponibles:</strong> 1</p>
+                        <hr>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-apply" onclick="aplicar('Soporte Técnico')">Aplicar</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="mensaje" aria-live="polite"></div>
+
+            <a href="index.html" class="volver">← Volver al inicio</a>
         </div>
-
-        <div class="vacante" data-carrera="administracion">
-            <h2>Asistente Administrativo</h2>
-            <p><b>Empresa:</b> Comercial Zacatecas</p>
-            <p><b>Carrera:</b> Administración</p>
-            <p><b>Descripción:</b> Apoyo en gestión de documentos y atención a clientes.</p>
-            <p><b>Lugares disponibles:</b> 3</p>
-            <button onclick="aplicar('Asistente Administrativo')">Aplicar</button>
-            <hr>
-        </div>
-
-        <div class="vacante" data-carrera="TI">
-            <h2>Soporte Técnico</h2>
-            <p><b>Empresa:</b> Sistemas del Norte</p>
-            <p><b>Carrera:</b> Tecnologías de la Información</p>
-            <p><b>Descripción:</b> Mantenimiento de equipos y soporte a usuarios.</p>
-            <p><b>Lugares disponibles:</b> 1</p>
-            <button onclick="aplicar('Soporte Técnico')">Aplicar</button>
-            <hr>
-        </div>
-
-    </div>
-
-    <p id="mensaje"></p>
-
-    <br>
-    <a href="index.html">← Volver al inicio</a>
+    </main>
 
     <script>
         function filtrar() {
             const carrera = document.getElementById('filtroCarrera').value;
+            const query = document.getElementById('buscarVacante').value.trim().toLowerCase();
             const vacantes = document.querySelectorAll('.vacante');
+            let anyVisible = false;
 
             vacantes.forEach(vacante => {
-                if (carrera === 'todas' || vacante.dataset.carrera === carrera) {
-                    vacante.style.display = 'block';
+                const matchesCarrera = (carrera === 'todas') || (vacante.dataset.carrera === carrera);
+                const text = vacante.innerText.toLowerCase();
+                const matchesQuery = query === '' || text.includes(query);
+
+                if (matchesCarrera && matchesQuery) {
+                    vacante.style.display = 'grid';
+                    anyVisible = true;
                 } else {
                     vacante.style.display = 'none';
                 }
             });
+
+            const lista = document.getElementById('listaVacantes');
+            if (!anyVisible) {
+                if (!document.querySelector('.empty')) {
+                    const empty = document.createElement('div');
+                    empty.className = 'empty';
+                    empty.textContent = 'No se encontraron vacantes con esos filtros.';
+                    lista.appendChild(empty);
+                }
+            } else {
+                const empty = document.querySelector('.empty');
+                if (empty) empty.remove();
+            }
+
+            document.getElementById('mensaje').textContent = '';
         }
 
         function aplicar(puesto) {
-            document.getElementById('mensaje').textContent = '¡Aplicaste a ' + puesto + ' exitosamente!';
+            const mensaje = document.getElementById('mensaje');
+            mensaje.style.color = '#1b7a2a';
+            mensaje.textContent = '¡Aplicaste a ' + puesto + ' exitosamente!';
+            // efecto visual breve
+            setTimeout(() => { mensaje.textContent = ''; }, 4500);
         }
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            filtrar();
+        });
     </script>
 
 </body>

@@ -5,37 +5,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publicar Estadía - EstadiTech</title>
     <link rel="stylesheet" href="estilos.css">
+    <style>
+        /* Barra superior */
+        header {
+            background-color: #2c7be5;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header img {
+            width: 100px; /* un poco más pequeño */
+            height: auto;
+        }
+
+        .slogan {
+            font-size: 16px;
+            font-weight: 500;
+            opacity: 0.9;
+            animation: mover 6s infinite alternate, fade 3s infinite alternate;
+        }
+
+        @keyframes mover {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes fade {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Contenido centrado */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        /* Recuadro del formulario */
+        .form-box {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 480px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .form-box h1 {
+            font-size: 22px;
+            color: #2c7be5;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .form-box p.subtitulo {
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-box label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-box input,
+        .form-box textarea,
+        .form-box select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-box button {
+            background-color: #2c7be5;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .form-box button:hover {
+            background-color: #1a5bbf;
+        }
+
+        #mensaje {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+            text-align: center;
+        }
+
+        .volver {
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Publicar estadía</h1>
+    <!-- Barra superior -->
+    <header>
+        <img src="EstadiTech.png" alt="Logo EstadiTech">
+        <div class="slogan">Buscamos talentos UTZAC y los canalizamos con empresas</div>
+    </header>
 
-    <label>Puesto:</label>
-    <input type="text" id="puesto" placeholder="Ej. Desarrollador Web, Soporte Técnico">
+    <!-- Contenido principal -->
+    <main>
+        <div class="form-box">
+            <h1>Publicar estadía</h1>
+            <p class="subtitulo">Comparte tus oportunidades con los estudiantes UTZAC</p>
 
-    <label>Descripción:</label>
-    <textarea id="descripcion" placeholder="Describe las actividades que hará el estudiante" rows="4" cols="40"></textarea>
+            <label for="puesto">Puesto:</label>
+            <input type="text" id="puesto" placeholder="Ej. Desarrollador Web, Asistente Administrativo">
 
-    <label>Carrera solicitada:</label>
-    <select id="carrera">
-        <option value="TI">Tecnologías de la Información</option>
-        <option value="administracion">Administración</option>
-        <option value="contabilidad">Contabilidad</option>
-        <option value="mecanica">Mecánica</option>
-    </select>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" placeholder="Describe las actividades que el estudiante realizará" rows="4"></textarea>
 
-    <label>Lugares disponibles:</label>
-    <input type="number" id="lugares" min="1" max="10" placeholder="¿Cuántos estudiantes aceptas?">
+            <label for="carrera">Carrera solicitada:</label>
+            <select id="carrera">
+                <option value="administracion">Administración de empresas</option>
+                <option value="agricultura">Agricultura</option>
+                <option value="contaduria">Contaduría</option>
+                <option value="educacion">Educación</option>
+                <option value="energia">Energía y Desarrollo Sostenible</option>
+                <option value="fisioterapia">Fisioterapia</option>
+                <option value="industrial">Ingeniería Industrial</option>
+                <option value="mantenimiento">Mantenimiento Industrial</option>
+                <option value="mecatronica">Mecatrónica</option>
+                <option value="mineria">Minería</option>
+                <option value="mercadotecnia">Negocios y Mercadotecnia</option>
+                <option value="TI">Tecnologías de la Información</option>
+            </select>
 
-    <label>Contacto:</label>
-    <input type="email" id="contacto" placeholder="correo@empresa.com">
+            <label for="lugares">Lugares disponibles:</label>
+            <input type="number" id="lugares" min="1" max="10" placeholder="¿Cuántos estudiantes aceptas?">
 
-    <button onclick="publicar()">Publicar estadía</button>
+            <label for="contacto">Contacto:</label>
+            <input type="email" id="contacto" placeholder="correo@empresa.com">
 
-    <p id="mensaje"></p>
+            <button onclick="publicar()">Publicar estadía</button>
 
-    <br>
-    <a href="index.html">← Volver al inicio</a>
+            <p id="mensaje"></p>
+
+            <a href="index.html" class="volver">← Volver al inicio</a>
+        </div>
+    </main>
 
     <script>
         function publicar() {
