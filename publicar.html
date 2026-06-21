@@ -1,197 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicar Estadía - EstadiTech</title>
-    <link rel="stylesheet" href="estilos.css">
-    <style>
-        /* Barra superior */
-        header {
-            background-color: #2c7be5;
-            color: white;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Publicar Estadía - EstadiTech</title>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+    :root{
+      --verde-oscuro: #1D6C61;
+      --verde-claro: #3EB9A8;
+      --blanco: #ffffff;
+      --fondo: #f4f4f4;
+      --texto: #1E201F;
+    }
 
-        header img {
-            width: 100px; /* un poco más pequeño */
-            height: auto;
-        }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;height:100%;background-color:var(--fondo);font-family:Arial, Helvetica, sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 
-        .slogan {
-            font-size: 16px;
-            font-weight: 500;
-            opacity: 0.9;
-            animation: mover 6s infinite alternate, fade 3s infinite alternate;
-        }
+    header{
+      background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+      padding:15px 30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      box-shadow:0 4px 10px rgba(0,0,0,0.15);
+      margin:0;
+      border:0;
+    }
 
-        @keyframes mover {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(20px); }
-            100% { transform: translateX(0); }
-        }
-        @keyframes fade {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
+    .logos{display:flex;align-items:center;gap:20px;}
+    .logos img{height:80px;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3));display:block;margin:0;padding:0;line-height:0;object-fit:contain;}
 
-        /* Contenido centrado */
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 40px;
-            text-align: center;
-        }
+    nav{display:flex;gap:20px;align-items:center;}
+    nav a{color:var(--verde-oscuro);text-decoration:none;font-weight:bold;transition:color .3s ease,text-shadow .3s ease;text-shadow:1px 1px 3px rgba(0,0,0,0.2);margin:0;padding:0;}
+    nav a:hover{color:var(--verde-claro);text-shadow:2px 2px 6px rgba(0,0,0,0.3);}
 
-        /* Recuadro del formulario */
-        .form-box {
-            background-color: #f9f9f9;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            max-width: 480px;
-            width: 100%;
-            text-align: left;
-        }
+    .slogan{background-color:var(--verde-oscuro);color:var(--blanco);padding:12px 30px;font-size:18px;font-weight:700;text-align:center;box-shadow:inset 0 -3px 6px rgba(0,0,0,0.3);overflow:hidden;position:relative;margin:0;border-top:0;line-height:1;white-space:nowrap;}
+    .slogan span{display:inline-block;animation:anuncio 8s linear infinite;}
+    @keyframes anuncio{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
 
-        .form-box h1 {
-            font-size: 22px;
-            color: #2c7be5;
-            margin-bottom: 5px;
-            text-align: center;
-        }
+    main{display:flex;flex-direction:column;align-items:center;margin:0 auto;padding:28px 20px 60px;text-align:center;max-width:1100px;}
 
-        .form-box p.subtitulo {
-            font-size: 14px;
-            color: #555;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    h1{color:#193A31;margin-bottom:20px;text-shadow:2px 2px 5px rgba(0,0,0,0.2);}
+    p{color:var(--texto);margin:0;}
 
-        .form-box label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #333;
-            font-weight: bold;
-        }
+    .form-box{background-color:#ffffff;padding:30px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.2);max-width:500px;width:100%;text-align:left;border-left:5px solid var(--verde-oscuro);}
+    .form-box h1{font-size:24px;color:#193A31;margin-bottom:10px;text-align:center;text-shadow:2px 2px 5px rgba(0,0,0,0.2);}
+    .form-box p.subtitulo{font-size:14px;color:#555;text-align:center;margin-bottom:20px;}
+    .form-box label{display:block;margin-bottom:5px;font-size:14px;color:#333;font-weight:bold;}
+    .form-box input,.form-box textarea,.form-box select{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:5px;font-size:14px;background:#fff;}
+    .form-box button{background-color:var(--verde-oscuro);color:white;padding:12px;border:none;border-radius:5px;width:100%;cursor:pointer;font-size:16px;font-weight:bold;box-shadow:2px 2px 6px rgba(0,0,0,0.2);transition:background-color .3s ease,box-shadow .3s ease;}
+    .form-box button:hover{background-color:var(--verde-claro);box-shadow:3px 3px 8px rgba(0,0,0,0.3);}
 
-        .form-box input,
-        .form-box textarea,
-        .form-box select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
+    #mensaje{margin-top:10px;font-weight:bold;color:green;text-align:center;}
+    .volver{margin-top:15px;display:block;text-align:center;font-size:14px;color:var(--verde-claro);text-decoration:none;text-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+    .volver:hover{color:var(--verde-oscuro);text-shadow:2px 2px 6px rgba(0,0,0,0.3);}
 
-        .form-box button {
-            background-color: #2c7be5;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-        }
-
-        .form-box button:hover {
-            background-color: #1a5bbf;
-        }
-
-        #mensaje {
-            margin-top: 10px;
-            font-weight: bold;
-            color: green;
-            text-align: center;
-        }
-
-        .volver {
-            margin-top: 15px;
-            display: block;
-            text-align: center;
-            font-size: 14px;
-        }
-    </style>
+    @media (max-width:800px){
+      .logos img{height:60px;}
+      header{padding:12px 16px;}
+      .slogan{padding:10px 16px;font-size:16px;}
+      main{padding:20px 12px 40px;}
+    }
+  </style>
 </head>
 <body>
-
-    <!-- Barra superior -->
-    <header>
-        <img src="EstadiTech.png" alt="Logo EstadiTech">
-        <div class="slogan">Buscamos talentos UTZAC y los canalizamos con empresas</div>
-    </header>
-
-    <!-- Contenido principal -->
-    <main>
-        <div class="form-box">
-            <h1>Publicar estadía</h1>
-            <p class="subtitulo">Comparte tus oportunidades con los estudiantes</p>
-
-            <label for="puesto">Puesto:</label>
-            <input type="text" id="puesto" placeholder="Ej. Desarrollador Web, Asistente Administrativo">
-
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" placeholder="Describe las actividades que el estudiante realizará" rows="4"></textarea>
-
-            <label for="carrera">Carrera solicitada:</label>
-            <select id="carrera">
-                <option value="administración">Administración de empresas</option>
-                <option value="agricultura">Agricultura</option>
-                <option value="contaduria">Contaduría</option>
-                <option value="educacion">Educación</option>
-                <option value="energia">Energía y Desarrollo Sostenible</option>
-                <option value="fisioterapia">Fisioterapia</option>
-                <option value="mantenimiento">Mantenimiento Industrial</option>
-                <option value="mecatronica">Mecatrónica</option>
-                <option value="mineria">Minería</option>
-                <option value="mercadotecnia">Negocios y Mercadotecnia</option>
-                <option value="TI">Tecnologías de la Información</option>
-            </select>
-
-            <label for="lugares">Lugares disponibles:</label>
-            <input type="number" id="lugares" min="1" max="10" placeholder="¿Cuántos estudiantes aceptas?">
-
-            <label for="contacto">Contacto de la empresa contratante:</label>
-            <input type="email" id="contacto" placeholder="correo@empresa.com">
-
-            <button onclick="publicar()">Publicar estadía</button>
-
-            <p id="mensaje"></p>
-
-            <a href="index.html" class="volver"> ← Volver al inicio </a>
-        </div>
-    </main>
-
-    <script>
-        function publicar() {
-            const puesto = document.getElementById('puesto').value;
-            const descripcion = document.getElementById('descripcion').value;
-            const lugares = document.getElementById('lugares').value;
-            const contacto = document.getElementById('contacto').value;
-
-            if (!puesto || !descripcion || !lugares || !contacto) {
-                document.getElementById('mensaje').textContent = 'Por favor completa todos los campos.';
-                return;
-            }
-
-            if (!contacto.includes('@')) {
-                document.getElementById('mensaje').textContent = 'El correo que ingresaste no es válido.';
-                return;
-            }
-
-            document.getElementById('mensaje').textContent = '¡Estadía publicada exitosamente!';
-        }
-    </script>
-
+  <header>
+    <div class="logos">
+      <img src="logoutzac.png" alt="Logo UTZAC">
+      <img src="estaditechlogo.png" alt="Logo EstadiTech">
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="registro.html">Registro</a>
+      <a href="vacantes.html">Vacantes</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+  <div class="slogan"><span>Buscamos talentos UTZAC y los canalizamos con empresas</span></div>
+  <main>
+    <div class="form-box">
+      <h1>Publicar estadía</h1>
+      <p class="subtitulo">Comparte tus oportunidades con los estudiantes</p>
+      <label for="puesto">Puesto:</label>
+      <input type="text" id="puesto" placeholder="Ej. Desarrollador Web, Asistente Administrativo">
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" placeholder="Describe las actividades que el estudiante realizará" rows="4"></textarea>
+      <label for="carrera">Carrera solicitada:</label>
+      <select id="carrera">
+        <option value="administración">Administración de empresas</option>
+        <option value="agricultura">Agricultura</option>
+        <option value="contaduria">Contaduría</option>
+        <option value="educacion">Educación</option>
+        <option value="energia">Energía y Desarrollo Sostenible</option>
+        <option value="fisioterapia">Fisioterapia</option>
+        <option value="mantenimiento">Mantenimiento Industrial</option>
+        <option value="mecatronica">Mecatrónica</option>
+        <option value="mineria">Minería</option>
+        <option value="mercadotecnia">Negocios y Mercadotecnia</option>
+        <option value="TI">Tecnologías de la Información</option>
+      </select>
+      <label for="lugares">Lugares disponibles:</label>
+      <input type="number" id="lugares" min="1" max="10" placeholder="¿Cuántos estudiantes aceptas?">
+      <label for="contacto">Contacto de la empresa contratante:</label>
+      <input type="email" id="contacto" placeholder="correo@empresa.com">
+      <button onclick="publicar()">Publicar estadía</button>
+      <p id="mensaje"></p>
+      <a href="index.html" class="volver"> ← Volver al inicio </a>
+    </div>
+  </main>
+  <script>
+    function publicar(){
+      const puesto=document.getElementById('puesto').value.trim();
+      const descripcion=document.getElementById('descripcion').value.trim();
+      const lugares=document.getElementById('lugares').value.trim();
+      const contacto=document.getElementById('contacto').value.trim();
+      const mensaje=document.getElementById('mensaje');
+      if(!puesto||!descripcion||!lugares||!contacto){
+        mensaje.style.color='#c0392b';
+        mensaje.textContent='Por favor completa todos los campos.';
+        return;
+      }
+      const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!emailRegex.test(contacto)){
+        mensaje.style.color='#c0392b';
+        mensaje.textContent='El correo que ingresaste no es válido.';
+        return;
+      }
+      mensaje.style.color='green';
+      mensaje.textContent='¡Estadía publicada exitosamente!';
+    }
+  </script>
 </body>
 </html>
