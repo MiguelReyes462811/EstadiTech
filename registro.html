@@ -6,176 +6,234 @@
     <title>Registro - EstadiTech</title>
     <link rel="stylesheet" href="estilos.css" />
     <style>
-        /* Barra superior */
-        header {
-            background-color: #2c7be5;
-            color: white;
-            padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #f4f7f6, #ffffff);
+    margin: 0;
+    color: #222;
+}
 
-        header img {
-            width: 100px;
-            height: auto;
-        }
+header {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+}
 
-        .slogan {
-            font-size: 15px;
-            font-weight: 500;
-            opacity: 0.95;
-            animation: mover 6s infinite alternate, fade 3s infinite alternate;
-        }
+header img {
+    height: 80px;
+    width: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
 
-        @keyframes mover {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(18px); }
-            100% { transform: translateX(0); }
-        }
-        @keyframes fade {
-            0% { opacity: 0.75; }
-            100% { opacity: 1; }
-        }
+nav {
+    display: flex;
+    gap: 20px;
+}
 
-        /* Layout principal */
-        body {
-            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background: #fafafa;
-            margin: 0;
-            color: #222;
-        }
+nav a {
+    color: #1D6C61;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
 
-        main {
-            display: flex;
-            justify-content: center;
-            padding: 36px 16px;
-        }
+nav a:hover {
+    color: #3EB9A8;
+    border-bottom: 2px solid #3EB9A8;
+}
 
-        /* Caja del formulario */
-        .form-box {
-            background-color: #ffffff;
-            padding: 26px;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(20,30,60,0.06);
-            max-width: 760px;
-            width: 100%;
-        }
+.slogan {
+    background-color: #1D6C61;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
-        .form-header {
-            text-align: center;
-            margin-bottom: 18px;
-        }
+.slogan span {
+    display: inline-block;
+    animation: anuncio 10s linear infinite;
+}
 
-        .form-box h1 {
-            font-size: 22px;
-            color: #2c7be5;
-            margin: 0;
-        }
+@keyframes anuncio {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
 
-        .form-box p.subtitulo {
-            font-size: 14px;
-            color: #555;
-            margin: 6px 0 0 0;
-        }
+main {
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+}
 
-        /* Grid para campos */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px 18px;
-            margin-top: 18px;
-        }
+.form-box {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    max-width: 760px;
+    width: 100%;
+    border-left: 6px solid #1D6C61;
+}
 
-        /* Para campos que ocupan toda la fila */
-        .full {
-            grid-column: 1 / -1;
-        }
+.form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        label {
-            display: block;
-            font-size: 13px;
-            color: #333;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
+.form-box h1 {
+    font-size: 28px;
+    color: #193A31;
+    margin: 0;
+}
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="number"],
-        select,
-        textarea,
-        input[type="file"] {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #d6d6d6;
-            border-radius: 8px;
-            font-size: 14px;
-            background: #fff;
-            box-sizing: border-box;
-        }
+.subtitulo {
+    color: #555;
+}
 
-        textarea { resize: vertical; min-height: 84px; }
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+}
 
-        /* Botón principal */
-        .actions {
-            margin-top: 18px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-direction: column;
-        }
+.full {
+    grid-column: 1 / -1;
+}
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
 
-        .primary-btn {
-            background-color: #2c7be5;
-            color: #fff;
-            padding: 12px 16px;
-            border: none;
-            border-radius: 8px;
-            width: 100%;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 6px 14px rgba(42, 99, 200, 0.18);
-        }
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
 
-        .primary-btn:hover { background-color: #1a5bbf; }
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #1D6C61;
+    box-shadow: 0 0 8px rgba(29,108,97,0.3);
+}
 
-        .link-row {
-            font-size: 14px;
-            color: #444;
-            text-align: center;
-            margin-top: 8px;
-        }
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+.actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-        .link-row a { color: #2c7be5; text-decoration: none; font-weight: 600; }
+.primary-btn {
+    background-color: #1D6C61;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
 
-        #mensaje {
-            margin-top: 10px;
-            font-weight: 700;
-            color: #1b7a2a;
-            text-align: center;
-        }
+.primary-btn:hover {
+    background-color: #3EB9A8;
+    transform: translateY(-2px);
+}
 
-        /* Ocultar/mostrar secciones */
-        .hidden { display: none; }
+.link-row {
+    text-align: center;
+}
 
-        /* Responsive */
-        @media (max-width: 720px) {
-            .grid { grid-template-columns: 1fr; }
-            header { padding: 12px; }
-            .form-box { padding: 18px; }
-        }
-    </style>
+.link-row a {
+    color: #1D6C61;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-row a:hover {
+    color: #3EB9A8;
+}
+
+#mensaje {
+    text-align: center;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-box {
+        padding: 20px;
+    }
+
+    header img {
+        height: 60px;
+    }
+}
+</style>
 </head>
 <body>
 
-    <!-- Barra superior -->
     <header>
-        <img src="EstadiTech.png" alt="Logo EstadiTech">
-        <div class="slogan">Buscamos talentos UTZAC y los canalizamos con empresas</div>
-    </header>
+    <img src="estaditechlogo.png" alt="Logo EstadiTech">
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="registro.html">Registro</a>
+        <a href="vacantes.html">Vacantes</a>
+        <a href="login.html">Login</a>
+    </nav>
+</header>
+
+<div class="slogan">
+    <span>Buscamos talentos UTZAC y los conectamos con las mejores oportunidades profesionales</span>
+</div>
 
     <main>
         <div class="form-box">
