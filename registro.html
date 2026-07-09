@@ -228,26 +228,29 @@ textarea {
         <a href="registro.html">Registro</a>
         <a href="vacantes.html">Vacantes</a>
         <a href="login.html">Login</a>
+        <a href="progreso.html">Progreso</a>
     </nav>
 </header>
 
 <div class="slogan">
-    <span>Buscamos talentos UTZAC y los conectamos con las mejores oportunidades profesionales</span>
+    <span>¡Te ayudamos con tu trayectoría estudinatil!</span>
 </div>
 
     <main>
         <div class="form-box">
             <div class="form-header">
                 <h1>Crear cuenta</h1>
-                <p class="subtitulo">Regístrate como alumno o empresa para acceder a EstadiTech</p>
+                <p class="subtitulo">Regístrate para acceder a EstadiTech</p>
             </div>
 
             <div class="grid">
                 <div class="full">
-                    <label for="tipo">¿Eres alumno o empresa?</label>
+                    <label for="tipo">¿Cuál es tu rol?</label>
                     <select id="tipo" onchange="cambiarFormulario()">
                         <option value="alumno">Alumno</option>
                         <option value="empresa">Empresa</option>
+                        <option value="direccion_carrera">Director@ de carrera</option>
+                        <option value="vinculacion">Área de vinculación</option>
                     </select>
                 </div>
 
@@ -374,6 +377,56 @@ textarea {
                     </div>
                 </div>
             </div>
+#-----------------direccion de carreras--------------#
+                    <div id="camposDireccion" class="hidden">
+                        <div class="grid">
+                        <div>
+                            <label for="correoDireccion">Correo</label>
+                            <input type="email" id="correoDireccion" placeholder="correo@direccion.com">
+                        </div>
+
+                        <div>
+                            <label for="passwordDireccion">Contraseña</label>
+                            <input type="password" id="passwordDireccion" placeholder="Contraseña">
+                        </div>
+
+                        <div>
+                            <label for="nombreDireccion">Nombre(s) del responsable</label>
+                            <input type="text" id="nombreDireccion" placeholder="Nombre del responsable">
+                        </div>
+
+                        <div>
+                            <label for="apellidosDireccion">Apellidos del responsable</label>
+                            <input type="text" id="apellidosDireccion" placeholder="Apellidos del responsable">
+                        </div>
+
+                        <div class="full">
+                            <label for="carrerasAfin">Carrera afín</label>
+                            <input type="text" id="carrerasAfin" placeholder="Ej. TI, Administración">
+                        </div>
+                #-------vinculacion----
+                <div id="camposVinculacion" class="hidden">
+                        <div class="grid">
+                        <div>
+                            <label for="correoVinculacion">Correo</label>
+                            <input type="email" id="correoVinculacion" placeholder="correo@vinculación.com">
+                        </div>
+
+                        <div>
+                            <label for="passwordVinculacion">Contraseña</label>
+                            <input type="password" id="passwordVinculacion" placeholder="Contraseña">
+                        </div>
+
+                        <div>
+                            <label for="nombreVinculacion">Nombre(s) del responsable</label>
+                            <input type="text" id="nombreVinculacion" placeholder="Nombre del responsable">
+                        </div>
+
+                        <div>
+                            <label for="apellidosVinculacion">Apellidos del responsable</label>
+                            <input type="text" id="apellidosVinculacion" placeholder="Apellidos del responsable">
+                        </div>
+
 
             <div class="actions">
                 <button class="primary-btn" onclick="registrar()">Registrarse</button>
