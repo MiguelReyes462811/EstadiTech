@@ -5,141 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Login - EstadiTech</title>
     <link rel="stylesheet" href="estilos.css">
-    <style>
-    :root{
-        --verde-oscuro: #1D6C61;
-        --verde-claro: #3EB9A8;
-        --blanco: #ffffff;
-        --fondo: #f4f4f4;
-        --texto: #1E201F;
-    }
-
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;height:100%;background-color:var(--fondo);font-family:Arial, Helvetica, sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
-
-    header{
-        background: linear-gradient(to bottom, #ffffff, #f9f9f9);
-        padding:15px 30px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        box-shadow:0 4px 10px rgba(0,0,0,0.15);
-        margin:0;
-        border:0;
-    }
-
-    .logos{display:flex;align-items:center;gap:20px;}
-    .logos img{height:80px;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.3));display:block;margin:0;padding:0;line-height:0;object-fit:contain;}
-
-    nav{display:flex;gap:20px;align-items:center;}
-    nav a{color:var(--verde-oscuro);text-decoration:none;font-weight:bold;transition:color .3s ease,text-shadow .3s ease;text-shadow:1px 1px 3px rgba(0,0,0,0.2);margin:0;padding:0;}
-    nav a:hover{color:var(--verde-claro);text-shadow:2px 2px 6px rgba(0,0,0,0.3);}
-
-    .slogan{background-color:var(--verde-oscuro);color:var(--blanco);padding:12px 30px;font-size:18px;font-weight:700;text-align:center;box-shadow:inset 0 -3px 6px rgba(0,0,0,0.3);overflow:hidden;position:relative;margin:0;border-top:0;line-height:1;white-space:nowrap;}
-    .slogan span{display:inline-block;animation:anuncio 8s linear infinite;}
-    @keyframes anuncio{0%{transform:translateX(100%);}100%{transform:translateX(-100%);}}
-
-    main{display:flex;flex-direction:column;align-items:center;margin:0 auto;padding:28px 20px 60px;text-align:center;max-width:1100px;}
-
-    h1{color:#193A31;margin-bottom:18px;text-shadow:2px 2px 5px rgba(0,0,0,0.2);}
-    p{color:var(--texto);margin:0;}
-
-    .login-box{background-color:#f9f9f9;padding:30px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.2);max-width:420px;width:100%;text-align:left;border-left:5px solid var(--verde-oscuro);}
-    .login-box h1{color:#193A31;margin:0 0 12px 0;text-shadow:2px 2px 5px rgba(0,0,0,0.2);font-size:22px;text-align:center;}
-    .login-box label{display:block;margin-bottom:6px;font-weight:700;color:var(--verde-oscuro);text-shadow:1px 1px 3px rgba(0,0,0,0.12);}
-    .login-box input{width:100%;padding:10px;margin-bottom:14px;border:1px solid #ccc;border-radius:6px;background:#fff;box-shadow:inset 1px 1px 3px rgba(0,0,0,0.06);font-size:14px;}
-    .login-box button{background-color:var(--verde-oscuro);color:var(--blanco);padding:12px;border:none;border-radius:6px;width:100%;cursor:pointer;font-weight:700;box-shadow:2px 2px 6px rgba(0,0,0,0.18);transition:background-color .25s ease,transform .08s ease;}
-    .login-box button:hover{background-color:var(--verde-claro);transform:translateY(-2px);box-shadow:3px 6px 14px rgba(0,0,0,0.18);}
-
-    .links{margin-top:12px;text-align:center;}
-    .links a{color:var(--verde-claro);text-decoration:none;font-weight:700;}
-    .links a:hover{color:var(--verde-oscuro);}
-
-    #mensaje{margin-top:12px;font-weight:700;color:var(--verde-oscuro);text-shadow:1px 1px 3px rgba(0,0,0,0.12);text-align:center;}
-
-    @media (max-width:800px){
-        .logos img{height:60px;}
-        header{padding:12px 16px;}
-        .slogan{padding:10px 16px;font-size:16px;}
-        main{padding:20px 12px 40px;}
-    }
-    </style>
 </head>
 <body>
-    <header>
-    <div class="logos">
-        <img src="logoutzac.png" alt="Logo UTZAC">
-        <img src="estaditechlogo.png" alt="Logo EstadiTech">
-    </div>
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="registro.html">Registro</a>
-        <a href="vacantes.html">Vacantes</a>
-        <a href="login.html">Login</a>
-    </nav>
+    <header class="site-header">
+        <div class="logos">
+            <img src="logoutzac.png" alt="Logo UTZAC">
+            <img src="estaditechlogo.png" alt="Logo EstadiTech">
+        </div>
+        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+        <nav class="site-nav">
+            <a href="index.html">Inicio</a>
+            <a href="vacantes.html">Vacantes</a>
+            <a href="publicar.html">Publicar estadía</a>
+            <a href="progreso.html">Progreso</a>
+            <a href="login.html">Login</a>
+            <a href="registro.html" class="nav-cta">Registrarme</a>
+        </nav>
     </header>
+
     <div class="slogan"><span>Buscamos talentos UTZAC y los canalizamos con empresas</span></div>
-    <main>
-    <div class="login-box" role="form" aria-labelledby="login-title">
-    <h1 id="login-title">Iniciar sesión</h1>
 
-    <label for="rol">Selecciona tu rol:</label>
-    <select id="rol">
-        <option value="">-- Selecciona --</option>
-        <option value="alumno">Estudiante</option>
-        <option value="empresa">Empresa</option>
-        <option value="direccion">Dirección de carrera</option>
-        <option value="vinculacion">Vinculación</option>
-    </select>
+    <main class="centrado">
+        <div class="card card-centrada" role="form" aria-labelledby="login-title">
+            <h1 id="login-title" style="text-align:center; font-size:22px;">Iniciar sesión</h1>
 
-    <label for="correo">Correo:</label>
-    <input type="email" id="correo" placeholder="tucorreo@gmail.com" autocomplete="email">
+            <div class="campo">
+                <label for="rol">Selecciona tu rol</label>
+                <select id="rol">
+                    <option value="">-- Selecciona --</option>
+                    <option value="alumno">Estudiante</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="direccion">Dirección de carrera</option>
+                    <option value="vinculacion">Vinculación</option>
+                </select>
+            </div>
 
-    <label for="password">Contraseña:</label>
-    <input type="password" id="password" placeholder="Contraseña" autocomplete="current-password">
+            <div class="campo">
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" placeholder="tucorreo@gmail.com" autocomplete="email">
+            </div>
 
-    <button onclick="login()">Entrar</button>
+            <div class="campo">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="Contraseña" autocomplete="current-password">
+            </div>
 
-    <div class="links">
-        <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
-    </div>
-    <p id="mensaje" role="status" aria-live="polite"></p>
-</div>
+            <button class="btn btn-primary btn-block" onclick="login()">Entrar</button>
 
+            <p style="text-align:center; margin-top:14px;">¿No tienes cuenta? <a href="registro.html"><strong>Regístrate aquí</strong></a></p>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+        </div>
     </main>
+
+    <script src="js/app.js"></script>
     <script>
     function login(){
         const correo = document.getElementById('correo').value.trim();
         const password = document.getElementById('password').value;
+        const rol = document.getElementById('rol').value;
         const mensaje = document.getElementById('mensaje');
+        mensaje.className = '';
+
+        if(!rol){
+            mensaje.classList.add('mensaje-error');
+            mensaje.textContent = 'Selecciona tu rol.';
+            return;
+        }
         if(!correo || !password){
-        mensaje.style.color='#c0392b';
-        mensaje.textContent='Por favor llena todos los campos.';
-        return;
+            mensaje.classList.add('mensaje-error');
+            mensaje.textContent = 'Por favor llena todos los campos.';
+            return;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if(!emailRegex.test(correo)){
-        mensaje.style.color='#c0392b';
-        mensaje.textContent='El correo no es válido.';
-        return;
+            mensaje.classList.add('mensaje-error');
+            mensaje.textContent = 'El correo no es válido.';
+            return;
         }
         if(password.length < 8){
-        mensaje.style.color='#c0392b';
-        mensaje.textContent='La contraseña debe tener al menos 8 caracteres.';
-        return;
+            mensaje.classList.add('mensaje-error');
+            mensaje.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+            return;
         }
         if(!/[A-Z]/.test(password)){
-        mensaje.style.color='#c0392b';
-        mensaje.textContent='La contraseña debe tener al menos una mayúscula.';
-        return;
+            mensaje.classList.add('mensaje-error');
+            mensaje.textContent = 'La contraseña debe tener al menos una mayúscula.';
+            return;
         }
         if(!/[0-9]/.test(password)){
-        mensaje.style.color='#c0392b';
-        mensaje.textContent='La contraseña debe tener al menos un número.';
-        return;
+            mensaje.classList.add('mensaje-error');
+            mensaje.textContent = 'La contraseña debe tener al menos un número.';
+            return;
         }
-        mensaje.style.color='green';
-        mensaje.textContent='¡Bienvenido!';
+        mensaje.classList.add('mensaje-exito');
+        mensaje.textContent = '¡Bienvenido!';
     }
     </script>
 </body>

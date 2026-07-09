@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi progreso - EstadiTech</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logos">
+            <img src="logoutzac.png" alt="Logo UTZAC">
+            <img src="estaditechlogo.png" alt="Logo EstadiTech">
+        </div>
+        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+        <nav class="site-nav">
+            <a href="index.html">Inicio</a>
+            <a href="vacantes.html">Vacantes</a>
+            <a href="publicar.html">Publicar estadía</a>
+            <a href="progreso.html">Progreso</a>
+            <button id="logout-btn" style="background:none;border:none;font-weight:600;color:var(--verde-oscuro);cursor:pointer;font-family:inherit;font-size:14.5px;padding:6px 2px;">Cerrar sesión</button>
+        </nav>
+    </header>
+
+    <div class="slogan"><span>¡Te ayudamos con tu trayectoria estudiantil!</span></div>
+
+    <main>
+        <div class="pagina-header">
+            <h1>Mi progreso de estadía</h1>
+            <p>Marca los requisitos conforme los vayas completando</p>
+        </div>
+
+        <!-- Se muestra si el alumno aún no tiene estadía confirmada -->
+        <div id="bloqueo" class="bloqueo-box oculto">
+            <h2>Aún no tienes una estadía confirmada</h2>
+            <p>
+                En cuanto la empresa o la dirección de carrera confirmen tu estadía,
+                aquí podrás llevar el control de los requisitos que pide la universidad.
+            </p>
+        </div>
+
+        <!-- Contenido principal: se muestra solo si hay estadía confirmada -->
+        <div id="contenido" class="oculto">
+            <div class="progreso-box">
+                <div class="circulo-wrap">
+                    <svg viewBox="0 0 180 180" width="180" height="180">
+                        <circle class="circulo-fondo" cx="90" cy="90" r="78"></circle>
+                        <circle id="circulo-avance" class="circulo-avance" cx="90" cy="90" r="78"></circle>
+                    </svg>
+                    <div class="circulo-texto">
+                        <span class="pct" id="pct-texto">0%</span>
+                        <span class="lbl">completado</span>
+                    </div>
+                </div>
+                <p class="resumen" id="resumen-texto">
+                    Has completado 0 de 0 actividades.
+                    <span class="faltan" id="faltan-texto"></span>
+                </p>
+            </div>
+
+            <div id="lista-revisiones"></div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module">
+        // -----------------------------------------------------------------
+        // Capa de almacenamiento resiliente: usa Supabase si el proyecto
+        // ya tiene el cliente configurado (js/supabaseClient.js); si ese
+        // módulo no existe o falla, cae automáticamente a localStorage
+        // para que la página siga siendo utilizable sin backend.
+        // -----------------------------------------------------------------
+        let supabaseClient = null;
+        let usandoLocal = false;
+
+        try {
+            const mod = await import('./js/supabaseClient.js');
+            supabaseClient = mod.default;
+        } catch (e) {
+            console.warn('No se encontró js/supabaseClient.js; usando almacenamiento local.', e);
+            usandoLocal = true;
+        }
+
+        const LOCAL_KEY = 'estaditech_progreso_demo';
+
+        function leerLocal() {
+            try { return JSON.parse(localStorage.getItem(LOCAL_KEY)) || {}; }
+            catch { return {}; }
+        }
+        function guardarLocal(estado) {
+            localStorage.setItem(LOCAL_KEY, JSON.stringify(estado));
+        }
+
+        // ---------------------------------------------------------------
+        // Lista de requisitos según el documento de la universidad,
+        // agrupados por fecha de revisión.
+        // ---------------------------------------------------------------
+        const REVISIONES = [
+            {
+                titulo: "Primera revisión",
+                fecha: "5 de junio",
+                requisitos: [
+                    { id: "r1_portada", texto: "Portada y hoja de presentación" },
+                    { id: "r1_politica", texto: "Política de calidad de la UTZAC" },
+                    { id: "r1_mision", texto: "Misión, visión y valores de la UTZAC" },
+                    { id: "r1_perfil", texto: "Perfil de egreso de TSU" },
+                    { id: "r1_plan", texto: "Plan de trabajo" },
+                    { id: "r1_cap1", texto: "Capítulo 1: Introducción" },
+                    { id: "r1_cap2_50", texto: "Capítulo 2: Marco teórico y marco contextual (50%)" },
+                ],
+            },
+            {
+                titulo: "Segunda revisión",
+                fecha: "10 de julio",
+                requisitos: [
+                    { id: "r2_cap2_100", texto: "Capítulo 2: Marco teórico y marco contextual (100%)" },
+                    { id: "r2_cap3_50", texto: "Capítulo 3: Metodología y desarrollo del proyecto (50%)" },
+                    { id: "r2_oficio_pres", texto: "Oficio de presentación" },
+                    { id: "r2_oficio_acep", texto: "Oficio de aceptación" },
+                    { id: "r2_eval1", texto: "Primera evaluación: académica y empresarial (formato F-DIR 19 y 21)" },
+                ],
+            },
+            {
+                titulo: "Revisión final",
+                fecha: "14 de agosto",
+                requisitos: [
+                    { id: "r3_cap3_100", texto: "Capítulo 3: Metodología y desarrollo del proyecto (100%)" },
+                    { id: "r3_cap4", texto: "Capítulo 4: Resultados y conclusiones" },
+                    { id: "r3_eval2", texto: "Segunda evaluación: asesor empresarial y asesor académico (F-DIR 19 y 21)" },
+                    { id: "r3_resumen", texto: "Resumen" },
+                    { id: "r3_referencias", texto: "Referencias bibliográficas" },
+                    { id: "r3_anexos", texto: "Anexos" },
+                    { id: "r3_dedicatorias", texto: "Dedicatorias y agradecimientos" },
+                    { id: "r3_tabla_contenido", texto: "Tabla de contenido" },
+                    { id: "r3_lista_tablas", texto: "Lista de tablas y figuras" },
+                    { id: "r3_oficio_liberacion", texto: "Oficio de liberación" },
+                    { id: "r3_autorizacion", texto: "Autorización de impresión del reporte (con firmas de ambos asesores)" },
+                    { id: "r3_entrega", texto: "Entrega del archivo en Word a la dirección, asegurando que el reporte esté terminado y apegado a la estructura oficial" },
+                ],
+            },
+        ];
+
+        const TOTAL_REQUISITOS = REVISIONES.reduce((acc, r) => acc + r.requisitos.length, 0);
+
+        const CIRCUNFERENCIA = 2 * Math.PI * 78;
+        const circuloAvance = document.getElementById('circulo-avance');
+        circuloAvance.style.strokeDasharray = `${CIRCUNFERENCIA}`;
+        circuloAvance.style.strokeDashoffset = `${CIRCUNFERENCIA}`;
+
+        function actualizarCirculo(completados) {
+            const pct = TOTAL_REQUISITOS === 0 ? 0 : Math.round((completados / TOTAL_REQUISITOS) * 100);
+            const offset = CIRCUNFERENCIA - (pct / 100) * CIRCUNFERENCIA;
+            circuloAvance.style.strokeDashoffset = `${offset}`;
+            document.getElementById('pct-texto').textContent = `${pct}%`;
+
+            const faltan = TOTAL_REQUISITOS - completados;
+            document.getElementById('resumen-texto').firstChild.textContent =
+                `Has completado ${completados} de ${TOTAL_REQUISITOS} actividades. `;
+            document.getElementById('faltan-texto').textContent =
+                faltan === 0 ? '¡Completaste todos los requisitos!' : `Te faltan ${faltan} actividad${faltan === 1 ? '' : 'es'}.`;
+        }
+
+        function renderRevisiones(estadoGuardado) {
+            const contenedor = document.getElementById('lista-revisiones');
+            contenedor.innerHTML = '';
+
+            REVISIONES.forEach((rev) => {
+                const bloque = document.createElement('div');
+                bloque.className = 'revision';
+
+                const header = document.createElement('div');
+                header.className = 'revision-header';
+                header.innerHTML = `<h2>${rev.titulo}</h2><span class="fecha">${rev.fecha}</span>`;
+                bloque.appendChild(header);
+
+                rev.requisitos.forEach((req) => {
+                    const completado = !!estadoGuardado[req.id];
+
+                    const fila = document.createElement('div');
+                    fila.className = 'requisito' + (completado ? ' completado' : '');
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = 'chk_' + req.id;
+                    checkbox.checked = completado;
+
+                    const label = document.createElement('label');
+                    label.setAttribute('for', checkbox.id);
+                    label.textContent = req.texto;
+
+                    checkbox.addEventListener('change', () => onToggle(req.id, checkbox.checked, fila));
+
+                    fila.appendChild(checkbox);
+                    fila.appendChild(label);
+                    bloque.appendChild(fila);
+                });
+
+                contenedor.appendChild(bloque);
+            });
+        }
+
+        function contarCompletados(estado) {
+            return Object.values(estado).filter(Boolean).length;
+        }
+
+        let userId = null;
+        let estadoActual = {};
+
+        async function onToggle(requisitoId, completado, filaEl) {
+            estadoActual[requisitoId] = completado;
+            filaEl.classList.toggle('completado', completado);
+            if (completado) {
+                filaEl.classList.remove('recien-marcado');
+                void filaEl.offsetWidth; // reinicia la animación
+                filaEl.classList.add('recien-marcado');
+            }
+            actualizarCirculo(contarCompletados(estadoActual));
+
+            if (usandoLocal) {
+                guardarLocal(estadoActual);
+                return;
+            }
+
+            const { error } = await supabaseClient
+                .from('progreso_requisitos')
+                .upsert([{
+                    alumno_id: userId,
+                    requisito_id: requisitoId,
+                    completado,
+                    fecha_completado: completado ? new Date().toISOString() : null,
+                }], { onConflict: 'alumno_id,requisito_id' });
+
+            if (error) {
+                console.error('Error al guardar el progreso:', error.message);
+            }
+        }
+
+        async function iniciarConSupabase() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                window.location.href = 'login.html';
+                return;
+            }
+            userId = session.user.id;
+
+            const { data: profile, error: profileError } = await supabaseClient
+                .from('profiles')
+                .select('rol')
+                .eq('id', userId)
+                .single();
+
+            if (profileError || !profile || profile.rol !== 'alumno') {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const { data: alumno, error: alumnoError } = await supabaseClient
+                .from('alumnos')
+                .select('estadia_confirmada')
+                .eq('id', userId)
+                .single();
+
+            if (alumnoError || !alumno || !alumno.estadia_confirmada) {
+                document.getElementById('bloqueo').classList.remove('oculto');
+                return;
+            }
+
+            const { data: filas, error: progresoError } = await supabaseClient
+                .from('progreso_requisitos')
+                .select('requisito_id, completado')
+                .eq('alumno_id', userId);
+
+            if (progresoError) {
+                console.error('Error al cargar el progreso:', progresoError.message);
+            }
+
+            estadoActual = {};
+            (filas || []).forEach((f) => { estadoActual[f.requisito_id] = f.completado; });
+
+            mostrarContenido();
+        }
+
+        function iniciarConLocalStorage() {
+            // Sin backend disponible: el progreso se guarda en este navegador.
+            estadoActual = leerLocal();
+            mostrarContenido();
+        }
+
+        function mostrarContenido() {
+            document.getElementById('contenido').classList.remove('oculto');
+            renderRevisiones(estadoActual);
+            actualizarCirculo(contarCompletados(estadoActual));
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            if (!usandoLocal && supabaseClient) {
+                await supabaseClient.auth.signOut();
+            }
+            window.location.href = 'index.html';
+        });
+
+        if (usandoLocal) {
+            iniciarConLocalStorage();
+        } else {
+            iniciarConSupabase();
+        }
+    </script>
+</body>
+</html>

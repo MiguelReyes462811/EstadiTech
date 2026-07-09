@@ -5,246 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Registro - EstadiTech</title>
     <link rel="stylesheet" href="estilos.css" />
-    <style>
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom, #f4f7f6, #ffffff);
-    margin: 0;
-    color: #222;
-}
-
-header {
-    background-color: #ffffff;
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    background: linear-gradient(to bottom, #ffffff, #f9f9f9);
-}
-
-header img {
-    height: 80px;
-    width: auto;
-    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
-}
-
-nav {
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: #1D6C61;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-nav a:hover {
-    color: #3EB9A8;
-    border-bottom: 2px solid #3EB9A8;
-}
-
-.slogan {
-    background-color: #1D6C61;
-    color: white;
-    padding: 12px;
-    text-align: center;
-    font-weight: bold;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.slogan span {
-    display: inline-block;
-    animation: anuncio 10s linear infinite;
-}
-
-@keyframes anuncio {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-main {
-    display: flex;
-    justify-content: center;
-    padding: 40px 16px;
-}
-
-.form-box {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    max-width: 760px;
-    width: 100%;
-    border-left: 6px solid #1D6C61;
-}
-
-.form-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-box h1 {
-    font-size: 28px;
-    color: #193A31;
-    margin: 0;
-}
-
-.subtitulo {
-    color: #555;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 18px;
-}
-
-.full {
-    grid-column: 1 / -1;
-}
-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-select,
-textarea,
-input[type="file"] {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    outline: none;
-    border-color: #1D6C61;
-    box-shadow: 0 0 8px rgba(29,108,97,0.3);
-}
-
-textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-.actions {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.primary-btn {
-    background-color: #1D6C61;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    width: 100%;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-}
-
-.primary-btn:hover {
-    background-color: #3EB9A8;
-    transform: translateY(-2px);
-}
-
-.link-row {
-    text-align: center;
-}
-
-.link-row a {
-    color: #1D6C61;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.link-row a:hover {
-    color: #3EB9A8;
-}
-
-#mensaje {
-    text-align: center;
-    font-weight: bold;
-}
-
-.hidden {
-    display: none;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-
-    header {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-box {
-        padding: 20px;
-    }
-
-    header img {
-        height: 60px;
-    }
-}
-</style>
 </head>
 <body>
 
-    <header>
-    <img src="estaditechlogo.png" alt="Logo EstadiTech">
+    <header class="site-header">
+        <div class="logos">
+            <img src="logoutzac.png" alt="Logo UTZAC">
+            <img src="estaditechlogo.png" alt="Logo EstadiTech">
+        </div>
+        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+        <nav class="site-nav">
+            <a href="index.html">Inicio</a>
+            <a href="vacantes.html">Vacantes</a>
+            <a href="publicar.html">Publicar estadía</a>
+            <a href="progreso.html">Progreso</a>
+            <a href="login.html">Login</a>
+            <a href="registro.html" class="nav-cta">Registrarme</a>
+        </nav>
+    </header>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="registro.html">Registro</a>
-        <a href="vacantes.html">Vacantes</a>
-        <a href="login.html">Login</a>
-        <a href="progreso.html">Progreso</a>
-    </nav>
-</header>
+    <div class="slogan"><span>¡Te ayudamos con tu trayectoria estudiantil!</span></div>
 
-<div class="slogan">
-    <span>¡Te ayudamos con tu trayectoría estudinatil!</span>
-</div>
-
-    <main>
-        <div class="form-box">
-            <div class="form-header">
-                <h1>Crear cuenta</h1>
-                <p class="subtitulo">Regístrate para acceder a EstadiTech</p>
+    <main class="centrado">
+        <div class="card card-ancha">
+            <div class="pagina-header" style="margin-bottom:20px;">
+                <h1 style="font-size:26px;">Crear cuenta</h1>
+                <p>Regístrate para acceder a EstadiTech</p>
             </div>
 
-            <div class="grid">
-                <div class="full">
+            <div class="form-grid">
+                <div class="full campo">
                     <label for="tipo">¿Cuál es tu rol?</label>
                     <select id="tipo" onchange="cambiarFormulario()">
                         <option value="alumno">Alumno</option>
@@ -253,211 +43,195 @@ textarea {
                         <option value="vinculacion">Área de vinculación</option>
                     </select>
                 </div>
+            </div>
 
-                <!-- Campos para alumnos -->
-                <div id="camposAlumno">
-                    <div class="grid">
-                        <div>
-                            <label for="correoAlumno">Correo institucional</label>
-                            <input type="email" id="correoAlumno" placeholder="tucorreo@utzac.edu.mx">
-                        </div>
-
-                        <div>
-                            <label for="passwordAlumno">Contraseña</label>
-                            <input type="password" id="passwordAlumno" placeholder="Contraseña">
-                        </div>
-
-                        <div>
-                            <label for="nombreAlumno">Nombre(s)</label>
-                            <input type="text" id="nombreAlumno" placeholder="Tu nombre">
-                        </div>
-
-                        <div>
-                            <label for="apellidosAlumno">Apellidos</label>
-                            <input type="text" id="apellidosAlumno" placeholder="Tus apellidos">
-                        </div>
-
-                        <div>
-                            <label for="carreraAlumno">Carrera</label>
-                            <select id="carreraAlumno">
-                                <option value="administracion">Administración de empresas</option>
-                                <option value="agricultura">Agricultura</option>
-                                <option value="contaduria">Contaduría</option>
-                                <option value="educacion">Educación</option>
-                                <option value="energia">Energía y Desarrollo Sostenible</option>
-                                <option value="fisioterapia">Fisioterapia</option>
-                                <option value="industrial">Ingeniería Industrial</option>
-                                <option value="mantenimiento">Mantenimiento Industrial</option>
-                                <option value="mecatronica">Mecatrónica</option>
-                                <option value="mineria">Minería</option>
-                                <option value="mercadotecnia">Negocios y Mercadotecnia</option>
-                                <option value="TI">Tecnologías de la Información</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="especialidad">Especialidad</label>
-                            <input type="text" id="especialidad" placeholder="Tu especialidad (opcional)">
-                        </div>
-
-                        <div>
-                            <label for="licencias">Licencias</label>
-                            <input type="text" id="licencias" placeholder="Ej. Licencia de conducir, AWS">
-                        </div>
-
-                        <div>
-                            <label for="certificaciones">Certificaciones</label>
-                            <input type="text" id="certificaciones" placeholder="Ej. CCNA, Microsoft">
-                        </div>
-
-                        <div class="full">
-                            <label for="idiomas">Idiomas</label>
-                            <input type="text" id="idiomas" placeholder="Ej. Español, Inglés">
-                        </div>
-
-                        <div class="full">
-                            <label for="habilidades">Habilidades</label>
-                            <textarea id="habilidades" placeholder="Describe tus habilidades (opcional)"></textarea>
-                        </div>
-
-                        <div class="full">
-                            <label for="cv">Subir CV</label>
-                            <input type="file" id="cv" accept=".pdf,.doc,.docx">
-                        </div>
+            <!-- Campos para alumnos -->
+            <div id="camposAlumno">
+                <div class="form-grid">
+                    <div class="campo">
+                        <label for="correoAlumno">Correo institucional</label>
+                        <input type="email" id="correoAlumno" placeholder="tucorreo@utzac.edu.mx">
                     </div>
-                </div>
-
-                <!-- Campos para empresas -->
-                <div id="camposEmpresa" class="hidden">
-                    <div class="grid">
-                        <div>
-                            <label for="correoEmpresa">Correo</label>
-                            <input type="email" id="correoEmpresa" placeholder="correo@empresa.com">
-                        </div>
-
-                        <div>
-                            <label for="passwordEmpresa">Contraseña</label>
-                            <input type="password" id="passwordEmpresa" placeholder="Contraseña">
-                        </div>
-
-                        <div>
-                            <label for="nombreEmpresa">Nombre(s) del responsable</label>
-                            <input type="text" id="nombreEmpresa" placeholder="Nombre del responsable">
-                        </div>
-
-                        <div>
-                            <label for="apellidosEmpresa">Apellidos del responsable</label>
-                            <input type="text" id="apellidosEmpresa" placeholder="Apellidos del responsable">
-                        </div>
-
-                        <div class="full">
-                            <label for="nombreEmpresaRazon">Nombre de empresa</label>
-                            <input type="text" id="nombreEmpresaRazon" placeholder="Razón social o nombre comercial">
-                        </div>
-
-                        <div class="full">
-                            <label for="carrerasAfines">Carreras afines</label>
-                            <input type="text" id="carrerasAfines" placeholder="Ej. TI, Administración">
-                        </div>
-
-                        <div>
-                            <label for="direccion">Dirección</label>
-                            <input type="text" id="direccion" placeholder="Dirección de la empresa">
-                        </div>
-
-                        <div>
-                            <label for="numVacantes">Número de vacantes</label>
-                            <input type="number" id="numVacantes" min="1" placeholder="¿Cuántas vacantes tienes?">
-                        </div>
-
-                        <div class="full">
-                            <label for="convocatoria">Subir convocatoria</label>
-                            <input type="file" id="convocatoria" accept=".pdf,.doc,.docx">
-                        </div>
+                    <div class="campo">
+                        <label for="passwordAlumno">Contraseña</label>
+                        <input type="password" id="passwordAlumno" placeholder="Contraseña">
+                    </div>
+                    <div class="campo">
+                        <label for="nombreAlumno">Nombre(s)</label>
+                        <input type="text" id="nombreAlumno" placeholder="Tu nombre">
+                    </div>
+                    <div class="campo">
+                        <label for="apellidosAlumno">Apellidos</label>
+                        <input type="text" id="apellidosAlumno" placeholder="Tus apellidos">
+                    </div>
+                    <div class="campo">
+                        <label for="carreraAlumno">Carrera</label>
+                        <select id="carreraAlumno">
+                            <option value="administracion">Administración de empresas</option>
+                            <option value="agricultura">Agricultura</option>
+                            <option value="contaduria">Contaduría</option>
+                            <option value="educacion">Educación</option>
+                            <option value="energia">Energía y Desarrollo Sostenible</option>
+                            <option value="fisioterapia">Fisioterapia</option>
+                            <option value="industrial">Ingeniería Industrial</option>
+                            <option value="mantenimiento">Mantenimiento Industrial</option>
+                            <option value="mecatronica">Mecatrónica</option>
+                            <option value="mineria">Minería</option>
+                            <option value="mercadotecnia">Negocios y Mercadotecnia</option>
+                            <option value="TI">Tecnologías de la Información</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="especialidad">Especialidad</label>
+                        <input type="text" id="especialidad" placeholder="Tu especialidad (opcional)">
+                    </div>
+                    <div class="campo">
+                        <label for="licencias">Licencias</label>
+                        <input type="text" id="licencias" placeholder="Ej. Licencia de conducir, AWS">
+                    </div>
+                    <div class="campo">
+                        <label for="certificaciones">Certificaciones</label>
+                        <input type="text" id="certificaciones" placeholder="Ej. CCNA, Microsoft">
+                    </div>
+                    <div class="full campo">
+                        <label for="idiomas">Idiomas</label>
+                        <input type="text" id="idiomas" placeholder="Ej. Español, Inglés">
+                    </div>
+                    <div class="full campo">
+                        <label for="habilidades">Habilidades</label>
+                        <textarea id="habilidades" placeholder="Describe tus habilidades (opcional)"></textarea>
+                    </div>
+                    <div class="full campo">
+                        <label for="cv">Subir CV</label>
+                        <input type="file" id="cv" accept=".pdf,.doc,.docx">
                     </div>
                 </div>
             </div>
-#-----------------direccion de carreras--------------#
-                    <div id="camposDireccion" class="hidden">
-                        <div class="grid">
-                        <div>
-                            <label for="correoDireccion">Correo</label>
-                            <input type="email" id="correoDireccion" placeholder="correo@direccion.com">
-                        </div>
 
-                        <div>
-                            <label for="passwordDireccion">Contraseña</label>
-                            <input type="password" id="passwordDireccion" placeholder="Contraseña">
-                        </div>
-
-                        <div>
-                            <label for="nombreDireccion">Nombre(s) del responsable</label>
-                            <input type="text" id="nombreDireccion" placeholder="Nombre del responsable">
-                        </div>
-
-                        <div>
-                            <label for="apellidosDireccion">Apellidos del responsable</label>
-                            <input type="text" id="apellidosDireccion" placeholder="Apellidos del responsable">
-                        </div>
-
-                        <div class="full">
-                            <label for="carrerasAfin">Carrera afín</label>
-                            <input type="text" id="carrerasAfin" placeholder="Ej. TI, Administración">
-                        </div>
-                #-------vinculacion----
-                <div id="camposVinculacion" class="hidden">
-                        <div class="grid">
-                        <div>
-                            <label for="correoVinculacion">Correo</label>
-                            <input type="email" id="correoVinculacion" placeholder="correo@vinculación.com">
-                        </div>
-
-                        <div>
-                            <label for="passwordVinculacion">Contraseña</label>
-                            <input type="password" id="passwordVinculacion" placeholder="Contraseña">
-                        </div>
-
-                        <div>
-                            <label for="nombreVinculacion">Nombre(s) del responsable</label>
-                            <input type="text" id="nombreVinculacion" placeholder="Nombre del responsable">
-                        </div>
-
-                        <div>
-                            <label for="apellidosVinculacion">Apellidos del responsable</label>
-                            <input type="text" id="apellidosVinculacion" placeholder="Apellidos del responsable">
-                        </div>
-
-
-            <div class="actions">
-                <button class="primary-btn" onclick="registrar()">Registrarse</button>
-                <div class="link-row">
-                    ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
+            <!-- Campos para empresas -->
+            <div id="camposEmpresa" class="oculto">
+                <div class="form-grid">
+                    <div class="campo">
+                        <label for="correoEmpresa">Correo</label>
+                        <input type="email" id="correoEmpresa" placeholder="correo@empresa.com">
+                    </div>
+                    <div class="campo">
+                        <label for="passwordEmpresa">Contraseña</label>
+                        <input type="password" id="passwordEmpresa" placeholder="Contraseña">
+                    </div>
+                    <div class="campo">
+                        <label for="nombreEmpresa">Nombre(s) del responsable</label>
+                        <input type="text" id="nombreEmpresa" placeholder="Nombre del responsable">
+                    </div>
+                    <div class="campo">
+                        <label for="apellidosEmpresa">Apellidos del responsable</label>
+                        <input type="text" id="apellidosEmpresa" placeholder="Apellidos del responsable">
+                    </div>
+                    <div class="full campo">
+                        <label for="nombreEmpresaRazon">Nombre de empresa</label>
+                        <input type="text" id="nombreEmpresaRazon" placeholder="Razón social o nombre comercial">
+                    </div>
+                    <div class="full campo">
+                        <label for="carrerasAfines">Carreras afines</label>
+                        <input type="text" id="carrerasAfines" placeholder="Ej. TI, Administración">
+                    </div>
+                    <div class="campo">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" placeholder="Dirección de la empresa">
+                    </div>
+                    <div class="campo">
+                        <label for="numVacantes">Número de vacantes</label>
+                        <input type="number" id="numVacantes" min="1" placeholder="¿Cuántas vacantes tienes?">
+                    </div>
+                    <div class="full campo">
+                        <label for="convocatoria">Subir convocatoria</label>
+                        <input type="file" id="convocatoria" accept=".pdf,.doc,.docx">
+                    </div>
                 </div>
+            </div>
+
+            <!-- Campos para dirección de carrera -->
+            <div id="camposDireccion" class="oculto">
+                <div class="form-grid">
+                    <div class="campo">
+                        <label for="correoDireccion">Correo</label>
+                        <input type="email" id="correoDireccion" placeholder="correo@utzac.edu.mx">
+                    </div>
+                    <div class="campo">
+                        <label for="passwordDireccion">Contraseña</label>
+                        <input type="password" id="passwordDireccion" placeholder="Contraseña">
+                    </div>
+                    <div class="campo">
+                        <label for="nombreDireccion">Nombre(s) del responsable</label>
+                        <input type="text" id="nombreDireccion" placeholder="Nombre del responsable">
+                    </div>
+                    <div class="campo">
+                        <label for="apellidosDireccion">Apellidos del responsable</label>
+                        <input type="text" id="apellidosDireccion" placeholder="Apellidos del responsable">
+                    </div>
+                    <div class="full campo">
+                        <label for="carreraAfin">Carrera a su cargo</label>
+                        <input type="text" id="carreraAfin" placeholder="Ej. Tecnologías de la Información">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campos para vinculación -->
+            <div id="camposVinculacion" class="oculto">
+                <div class="form-grid">
+                    <div class="campo">
+                        <label for="correoVinculacion">Correo</label>
+                        <input type="email" id="correoVinculacion" placeholder="correo@utzac.edu.mx">
+                    </div>
+                    <div class="campo">
+                        <label for="passwordVinculacion">Contraseña</label>
+                        <input type="password" id="passwordVinculacion" placeholder="Contraseña">
+                    </div>
+                    <div class="campo">
+                        <label for="nombreVinculacion">Nombre(s) del responsable</label>
+                        <input type="text" id="nombreVinculacion" placeholder="Nombre del responsable">
+                    </div>
+                    <div class="campo">
+                        <label for="apellidosVinculacion">Apellidos del responsable</label>
+                        <input type="text" id="apellidosVinculacion" placeholder="Apellidos del responsable">
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+                <button class="btn btn-primary btn-block" onclick="registrar()">Registrarse</button>
+                <p style="text-align:center;">¿Ya tienes cuenta? <a href="login.html"><strong>Inicia sesión aquí</strong></a></p>
                 <div id="mensaje" role="status" aria-live="polite"></div>
             </div>
         </div>
     </main>
 
+    <script src="js/app.js"></script>
     <script>
-        // Inicializa mostrando campos de alumno
+        // Preselecciona el rol según el parámetro ?tipo= que envía index.html
         document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const tipo = params.get('tipo');
+            const select = document.getElementById('tipo');
+            if (tipo && [...select.options].some(o => o.value === tipo)) {
+                select.value = tipo;
+            }
             cambiarFormulario();
         });
 
         function cambiarFormulario() {
             const tipo = document.getElementById('tipo').value;
-            const alumno = document.getElementById('camposAlumno');
-            const empresa = document.getElementById('camposEmpresa');
+            const secciones = {
+                alumno: document.getElementById('camposAlumno'),
+                empresa: document.getElementById('camposEmpresa'),
+                direccion_carrera: document.getElementById('camposDireccion'),
+                vinculacion: document.getElementById('camposVinculacion'),
+            };
 
-            if (tipo === 'alumno') {
-                alumno.classList.remove('hidden');
-                empresa.classList.add('hidden');
-            } else {
-                alumno.classList.add('hidden');
-                empresa.classList.remove('hidden');
-            }
+            Object.entries(secciones).forEach(([clave, el]) => {
+                el.classList.toggle('oculto', clave !== tipo);
+            });
 
-            // Limpia mensaje al cambiar
             document.getElementById('mensaje').textContent = '';
         }
 
@@ -468,64 +242,61 @@ textarea {
             return '';
         }
 
+        // Reglas de validación por tipo de cuenta: qué campos son obligatorios
+        const CAMPOS_POR_TIPO = {
+            alumno: {
+                requeridos: ['correoAlumno', 'passwordAlumno', 'nombreAlumno', 'apellidosAlumno'],
+                correo: 'correoAlumno',
+                password: 'passwordAlumno',
+            },
+            empresa: {
+                requeridos: ['correoEmpresa', 'passwordEmpresa', 'nombreEmpresa', 'apellidosEmpresa', 'nombreEmpresaRazon'],
+                correo: 'correoEmpresa',
+                password: 'passwordEmpresa',
+            },
+            direccion_carrera: {
+                requeridos: ['correoDireccion', 'passwordDireccion', 'nombreDireccion', 'apellidosDireccion', 'carreraAfin'],
+                correo: 'correoDireccion',
+                password: 'passwordDireccion',
+            },
+            vinculacion: {
+                requeridos: ['correoVinculacion', 'passwordVinculacion', 'nombreVinculacion', 'apellidosVinculacion'],
+                correo: 'correoVinculacion',
+                password: 'passwordVinculacion',
+            },
+        };
+
         function registrar() {
             const tipo = document.getElementById('tipo').value;
             const mensajeEl = document.getElementById('mensaje');
-            mensajeEl.textContent = '';
+            mensajeEl.className = '';
 
-            if (tipo === 'alumno') {
-                const correo = document.getElementById('correoAlumno').value.trim();
-                const password = document.getElementById('passwordAlumno').value;
-                const nombre = document.getElementById('nombreAlumno').value.trim();
-                const apellidos = document.getElementById('apellidosAlumno').value.trim();
+            const reglas = CAMPOS_POR_TIPO[tipo];
 
-                if (!correo || !password || !nombre || !apellidos) {
-                    mensajeEl.style.color = '#c0392b';
-                    mensajeEl.textContent = 'Por favor llena todos los campos obligatorios.';
-                    return;
-                }
-
-                if (!correo.includes('@')) {
-                    mensajeEl.style.color = '#c0392b';
-                    mensajeEl.textContent = 'El correo no es válido.';
-                    return;
-                }
-
-                const passErr = validarContrasena(password);
-                if (passErr) {
-                    mensajeEl.style.color = '#c0392b';
-                    mensajeEl.textContent = passErr;
-                    return;
-                }
-
-            } else {
-                const correo = document.getElementById('correoEmpresa').value.trim();
-                const password = document.getElementById('passwordEmpresa').value;
-                const nombre = document.getElementById('nombreEmpresa').value.trim();
-                const apellidos = document.getElementById('apellidosEmpresa').value.trim();
-                const nombreEmpresa = document.getElementById('nombreEmpresaRazon').value.trim();
-
-                if (!correo || !password || !nombre || !apellidos || !nombreEmpresa) {
-                    mensajeEl.style.color = '#c0392b';
-                    mensajeEl.textContent = 'Por favor llena todos los campos obligatorios.';
-                    return;
-                }
-
-                if (!correo.includes('@')) {
-                    mensajeEl.style.color = '#c0392b';
-                    mensajeEl.textContent = 'El correo no es válido.';
-                    return;
-                }
-
-                const passErr = validarContrasena(password);
-                if (passErr) {
-                    mensajeEl.style.color = '#c0392b';
-                    mensajeEl.textContent = passErr;
-                    return;
-                }
+            const faltante = reglas.requeridos.some(id => !document.getElementById(id).value.trim());
+            if (faltante) {
+                mensajeEl.classList.add('mensaje-error');
+                mensajeEl.textContent = 'Por favor llena todos los campos obligatorios.';
+                return;
             }
 
-            mensajeEl.style.color = '#1b7a2a';
+            const correo = document.getElementById(reglas.correo).value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(correo)) {
+                mensajeEl.classList.add('mensaje-error');
+                mensajeEl.textContent = 'El correo no es válido.';
+                return;
+            }
+
+            const password = document.getElementById(reglas.password).value;
+            const passErr = validarContrasena(password);
+            if (passErr) {
+                mensajeEl.classList.add('mensaje-error');
+                mensajeEl.textContent = passErr;
+                return;
+            }
+
+            mensajeEl.classList.add('mensaje-exito');
             mensajeEl.textContent = '¡Cuenta creada exitosamente!';
         }
     </script>
