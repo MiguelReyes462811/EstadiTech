@@ -1,105 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Login - EstadiTech</title>
-    <link rel="stylesheet" href="estilos.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Iniciar sesión - EstadiTech</title>
+<link rel="icon" href="img/estaditechlogo.png">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/componentes.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="logos">
-            <img src="logoutzac.png" alt="Logo UTZAC">
-            <img src="estaditechlogo.png" alt="Logo EstadiTech">
+
+<header class="site-header">
+    <div class="logos">
+        <img src="img/logoutzac.png" alt="Logo UTZAC">
+        <div class="separador"></div>
+        <img src="img/estaditechlogo.png" alt="Logo EstadiTech">
+    </div>
+    <nav class="site-nav">
+        <a class="enlace" href="index.html">← Volver al feed</a>
+    </nav>
+</header>
+
+<div class="slogan"><span>Buscamos talentos UTZAC y los canalizamos con empresas</span></div>
+
+<main style="padding:56px 20px 72px; display:flex; justify-content:center;">
+    <div class="card card-centrada card-acento" data-aos="fade-up">
+        <div class="divisor-chevron"></div>
+        <h1 style="font-size:23px;">Iniciar sesión</h1>
+        <p style="margin-bottom:22px;">Selecciona tu rol para acceder a tu panel</p>
+
+        <div class="campo">
+            <label for="rol">Tu rol</label>
+            <select id="rol">
+                <option value="alumno">Estudiante</option>
+                <option value="profesor">Profesor asesor</option>
+                <option value="vinculacion">Área de vinculación</option>
+                <option value="direccion">Director@ de carrera</option>
+            </select>
         </div>
-        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
-        <nav class="site-nav">
-            <a href="index.html">Inicio</a>
-            <a href="vacantes.html">Vacantes</a>
-            <a href="publicar.html">Publicar estadía</a>
-            <a href="progreso.html">Progreso</a>
-            <a href="login.html">Login</a>
-            <a href="registro.html" class="nav-cta">Registrarme</a>
-        </nav>
-    </header>
 
-    <div class="slogan"><span>Buscamos talentos UTZAC y los canalizamos con empresas</span></div>
-
-    <main class="centrado">
-        <div class="card card-centrada" role="form" aria-labelledby="login-title">
-            <h1 id="login-title" style="text-align:center; font-size:22px;">Iniciar sesión</h1>
-
-            <div class="campo">
-                <label for="rol">Selecciona tu rol</label>
-                <select id="rol">
-                    <option value="">-- Selecciona --</option>
-                    <option value="alumno">Estudiante</option>
-                    <option value="empresa">Empresa</option>
-                    <option value="direccion">Dirección de carrera</option>
-                    <option value="vinculacion">Vinculación</option>
-                </select>
-            </div>
-
-            <div class="campo">
-                <label for="correo">Correo</label>
-                <input type="email" id="correo" placeholder="tucorreo@gmail.com" autocomplete="email">
-            </div>
-
-            <div class="campo">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" placeholder="Contraseña" autocomplete="current-password">
-            </div>
-
-            <button class="btn btn-primary btn-block" onclick="login()">Entrar</button>
-
-            <p style="text-align:center; margin-top:14px;">¿No tienes cuenta? <a href="registro.html"><strong>Regístrate aquí</strong></a></p>
-            <p id="mensaje" role="status" aria-live="polite"></p>
+        <div class="campo">
+            <label for="correo">Correo</label>
+            <input type="email" id="correo" placeholder="tucorreo@utzac.edu.mx" autocomplete="email">
         </div>
-    </main>
 
-    <script src="js/app.js"></script>
-    <script>
-    function login(){
+        <div class="campo">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" placeholder="Contraseña" autocomplete="current-password">
+        </div>
+
+        <button class="btn btn-primary btn-block" onclick="validarFormulario()">Entrar</button>
+
+        <p style="text-align:center; margin-top:16px; font-size:13.5px;">¿No tienes cuenta? <a href="registro.html"><strong>Regístrate aquí</strong></a></p>
+        <p id="mensaje" role="status" aria-live="polite"></p>
+    </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script src="js/app.js"></script>
+<script>
+    // Preselecciona el rol según ?rol= (enviado desde los botones del feed)
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const rol = params.get('rol');
+        const select = document.getElementById('rol');
+        if (rol && [...select.options].some((o) => o.value === rol)) {
+            select.value = rol;
+        }
+    });
+
+    // Validación de formato únicamente. La autenticación real y la
+    // redirección a cada panel se conectarán cuando exista el backend
+    // en XAMPP (endpoint PHP de sesión).
+    function validarFormulario() {
         const correo = document.getElementById('correo').value.trim();
         const password = document.getElementById('password').value;
-        const rol = document.getElementById('rol').value;
         const mensaje = document.getElementById('mensaje');
         mensaje.className = '';
 
-        if(!rol){
-            mensaje.classList.add('mensaje-error');
-            mensaje.textContent = 'Selecciona tu rol.';
-            return;
-        }
-        if(!correo || !password){
+        if (!correo || !password) {
             mensaje.classList.add('mensaje-error');
             mensaje.textContent = 'Por favor llena todos los campos.';
             return;
         }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if(!emailRegex.test(correo)){
+        if (!emailRegex.test(correo)) {
             mensaje.classList.add('mensaje-error');
             mensaje.textContent = 'El correo no es válido.';
             return;
         }
-        if(password.length < 8){
-            mensaje.classList.add('mensaje-error');
-            mensaje.textContent = 'La contraseña debe tener al menos 8 caracteres.';
-            return;
-        }
-        if(!/[A-Z]/.test(password)){
-            mensaje.classList.add('mensaje-error');
-            mensaje.textContent = 'La contraseña debe tener al menos una mayúscula.';
-            return;
-        }
-        if(!/[0-9]/.test(password)){
-            mensaje.classList.add('mensaje-error');
-            mensaje.textContent = 'La contraseña debe tener al menos un número.';
-            return;
-        }
         mensaje.classList.add('mensaje-exito');
-        mensaje.textContent = '¡Bienvenido!';
+        mensaje.textContent = 'Formulario listo — conecta el backend en XAMPP para iniciar sesión de verdad.';
     }
-    </script>
+</script>
 </body>
 </html>

@@ -1,68 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EstadiTech — Del inicio al éxito</title>
-    <link rel="stylesheet" href="estilos.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EstadiTech — Convocatorias de estadía UTZAC</title>
+<link rel="icon" href="img/estaditechlogo.png">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/componentes.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="logos">
-            <img src="logoutzac.png" alt="Logo UTZAC">
-            <img src="estaditechlogo.png" alt="Logo EstadiTech">
+<header class="site-header">
+    <div class="logos">
+        <img src="img/logoutzac.png" alt="Logo UTZAC">
+        <div class="separador"></div>
+        <img src="img/estaditechlogo.png" alt="Logo EstadiTech">
+    </div>
+    <nav class="site-nav">
+        <button class="nav-rol" onclick="window.location.href='login.html?rol=alumno'">
+            <span class="punto"></span> Soy estudiante
+        </button>
+        <button class="nav-rol" onclick="window.location.href='login.html?rol=profesor'">
+            <span class="punto"></span> Soy profesor asesor
+        </button>
+        <button class="nav-rol" onclick="window.location.href='login.html?rol=vinculacion'">
+            <span class="punto"></span> Soy vinculación
+        </button>
+        <button class="nav-rol" onclick="window.location.href='login.html?rol=direccion'">
+            <span class="punto"></span> Soy director de carrera
+        </button>
+    </nav>
+</header>
+
+<div class="slogan"><span>¡Te ayudamos con tu trayectoria estudiantil! · Convocatorias de estadía para talento UTZAC</span></div>
+
+<section class="feed-hero">
+    <div class="contenedor">
+        <div class="eyebrow" data-aos="fade-up"><span class="barra"></span> Feed de convocatorias</div>
+        <h1 data-aos="fade-up" data-aos-delay="60">Explora las oportunidades de estadía disponibles para estudiantes de TSU</h1>
+        <p data-aos="fade-up" data-aos-delay="120">Vinculación y Dirección de Carrera publican aquí las convocatorias vigentes. Es un espacio informativo: consulta empresa, modalidad, carreras afines y fecha límite de cada oportunidad.</p>
+    </div>
+</section>
+
+<div class="contenedor">
+    <div class="filtros-feed" id="filtros-feed" data-aos="fade-up" data-aos-delay="80">
+        <div class="campo-filtro">
+            <label for="filtroCiudad">Ciudad</label>
+            <select id="filtroCiudad">
+                <option value="todas">Todas las ciudades</option>
+                <option value="zacatecas">Zacatecas</option>
+                <option value="guadalupe">Guadalupe</option>
+                <option value="fresnillo">Fresnillo</option>
+                <option value="jerez">Jerez</option>
+                <option value="remoto">Remoto</option>
+            </select>
         </div>
-        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
-        <nav class="site-nav">
-            <a href="index.html">Inicio</a>
-            <a href="vacantes.html">Vacantes</a>
-            <a href="publicar.html">Publicar estadía</a>
-            <a href="progreso.html">Progreso</a>
-            <a href="login.html">Login</a>
-            <a href="registro.html" class="nav-cta">Registrarme</a>
-        </nav>
-    </header>
-
-    <div class="slogan"><span>¡Te ayudamos con tu trayectoria estudiantil! · Buscamos talentos UTZAC y los canalizamos con empresas</span></div>
-
-    <main>
-        <div class="pagina-header">
-            <h1>EstadiTech</h1>
-            <p>Del inicio al éxito: te acompañamos en cada paso de tu estadía profesional.</p>
+        <div class="campo-filtro">
+            <label for="filtroModalidad">Modalidad</label>
+            <select id="filtroModalidad">
+                <option value="todas">Todas</option>
+                <option value="presencial">Presencial</option>
+                <option value="hibrida">Híbrida</option>
+                <option value="remota">Remota</option>
+            </select>
         </div>
+        <div class="campo-filtro">
+            <label for="filtroCarrera">Carrera afín</label>
+            <select id="filtroCarrera">
+                <option value="todas">Todas las carreras</option>
+                <option value="administracion">Administración de empresas</option>
+                <option value="agricultura">Agricultura</option>
+                <option value="contaduria">Contaduría</option>
+                <option value="educacion">Educación</option>
+                <option value="energia">Energía y Desarrollo Sostenible</option>
+                <option value="fisioterapia">Fisioterapia</option>
+                <option value="industrial">Ingeniería Industrial</option>
+                <option value="mantenimiento">Mantenimiento Industrial</option>
+                <option value="mecatronica">Mecatrónica</option>
+                <option value="mineria">Minería</option>
+                <option value="mercadotecnia">Negocios y Mercadotecnia</option>
+                <option value="TI">Tecnologías de la Información</option>
+            </select>
+        </div>
+        <div class="conteo-resultados" id="conteoResultados">0 convocatorias</div>
+    </div>
+</div>
 
-        <div class="card card-ancha">
-            <h2 style="text-align:center; margin-bottom:4px;">¿Cuál es tu rol?</h2>
-            <p style="text-align:center; margin-bottom:20px;">Elige una opción para crear tu cuenta con los campos correctos.</p>
+<main class="feed-body">
+    <div class="contenedor">
+        <div class="feed-cols">
+            <div class="feed-main">
+                <div class="grid-convocatorias" id="gridConvocatorias">
+                    <!-- Las tarjetas se generan con js/feed.js a partir de CONVOCATORIAS -->
+                </div>
 
-            <div class="roles-grid">
-                <button class="rol-card" onclick="window.location.href='registro.html?tipo=alumno'">
-                    <div class="icono">🎓</div>
-                    <strong>Soy estudiante</strong>
-                    <span>Busco una estadía profesional</span>
-                </button>
-                <button class="rol-card" onclick="window.location.href='registro.html?tipo=empresa'">
-                    <div class="icono">🏢</div>
-                    <strong>Soy empresa</strong>
-                    <span>Quiero publicar vacantes</span>
-                </button>
-                <button class="rol-card" onclick="window.location.href='registro.html?tipo=direccion_carrera'">
-                    <div class="icono">🧑‍💼</div>
-                    <strong>Soy Director@ de carrera</strong>
-                    <span>Doy seguimiento a mis alumnos</span>
-                </button>
-                <button class="rol-card" onclick="window.location.href='registro.html?tipo=vinculacion'">
-                    <div class="icono">🤝</div>
-                    <strong>Soy del área de vinculación</strong>
-                    <span>Coordino convenios y estadías</span>
-                </button>
+                <div class="estado-vacio oculto" id="estadoVacio">
+                    <div class="marca-vacio">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M4 7l8-4 8 4M4 7v10l8 4 8-4V7M4 7l8 4 8-4M12 11v10" stroke="#0F5C4F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <h3>Aún no hay convocatorias publicadas</h3>
+                    <p>En cuanto Vinculación o Dirección de Carrera publiquen una oportunidad, aparecerá aquí automáticamente. Vuelve a consultar esta sección más adelante.</p>
+                </div>
             </div>
 
-            <p style="text-align:center; margin-top:22px;">¿Ya tienes cuenta? <a href="login.html"><strong>Inicia sesión aquí</strong></a></p>
+            <aside class="feed-sidebar">
+                <div class="card" data-aos="fade-up">
+                    <h4>Sobre este feed</h4>
+                    <ul class="lista-mini">
+                        <li>Publican <b>Vinculación</b> y <b>Dirección de carrera</b></li>
+                        <li>Es solo informativo, sin postulación en línea</li>
+                        <li>Se actualiza con cada nueva convocatoria</li>
+                    </ul>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="80">
+                    <h4>¿Cómo funciona una estadía?</h4>
+                    <p style="font-size:13px;">Si te interesa una oportunidad, acércate directamente con tu Dirección de Carrera: ellos coordinan el proceso de vinculación con la empresa.</p>
+                </div>
+            </aside>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script src="js/app.js"></script>
+<script src="js/datos-convocatorias.js"></script>
+<script src="js/feed.js"></script>
 </body>
 </html>

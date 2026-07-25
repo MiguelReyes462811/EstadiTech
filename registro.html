@@ -3,42 +3,41 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Registro - EstadiTech</title>
-    <link rel="stylesheet" href="estilos.css" />
+    <title>Crear cuenta - EstadiTech</title>
+    <link rel="icon" href="img/estaditechlogo.png">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
 </head>
 <body>
 
     <header class="site-header">
         <div class="logos">
-            <img src="logoutzac.png" alt="Logo UTZAC">
-            <img src="estaditechlogo.png" alt="Logo EstadiTech">
+            <img src="img/logoutzac.png" alt="Logo UTZAC">
+            <div class="separador"></div>
+            <img src="img/estaditechlogo.png" alt="Logo EstadiTech">
         </div>
-        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
         <nav class="site-nav">
-            <a href="index.html">Inicio</a>
-            <a href="vacantes.html">Vacantes</a>
-            <a href="publicar.html">Publicar estadía</a>
-            <a href="progreso.html">Progreso</a>
-            <a href="login.html">Login</a>
-            <a href="registro.html" class="nav-cta">Registrarme</a>
+            <a class="enlace" href="index.html">← Volver al feed</a>
         </nav>
     </header>
 
     <div class="slogan"><span>¡Te ayudamos con tu trayectoria estudiantil!</span></div>
 
-    <main class="centrado">
-        <div class="card card-ancha">
-            <div class="pagina-header" style="margin-bottom:20px;">
-                <h1 style="font-size:26px;">Crear cuenta</h1>
-                <p>Regístrate para acceder a EstadiTech</p>
-            </div>
+    <main style="padding:48px 20px 72px; display:flex; justify-content:center;">
+        <div class="card card-ancha card-acento" data-aos="fade-up">
+            <div class="divisor-chevron"></div>
+            <h1 style="font-size:24px;">Crear cuenta</h1>
+            <p style="margin-bottom:22px;">Regístrate para acceder a EstadiTech</p>
 
             <div class="form-grid">
                 <div class="full campo">
                     <label for="tipo">¿Cuál es tu rol?</label>
                     <select id="tipo" onchange="cambiarFormulario()">
-                        <option value="alumno">Alumno</option>
-                        <option value="empresa">Empresa</option>
+                        <option value="alumno">Estudiante</option>
+                        <option value="profesor">Profesor asesor</option>
                         <option value="direccion_carrera">Director@ de carrera</option>
                         <option value="vinculacion">Área de vinculación</option>
                     </select>
@@ -82,70 +81,47 @@
                         </select>
                     </div>
                     <div class="campo">
-                        <label for="especialidad">Especialidad</label>
-                        <input type="text" id="especialidad" placeholder="Tu especialidad (opcional)">
-                    </div>
-                    <div class="campo">
-                        <label for="licencias">Licencias</label>
-                        <input type="text" id="licencias" placeholder="Ej. Licencia de conducir, AWS">
-                    </div>
-                    <div class="campo">
-                        <label for="certificaciones">Certificaciones</label>
-                        <input type="text" id="certificaciones" placeholder="Ej. CCNA, Microsoft">
-                    </div>
-                    <div class="full campo">
-                        <label for="idiomas">Idiomas</label>
-                        <input type="text" id="idiomas" placeholder="Ej. Español, Inglés">
-                    </div>
-                    <div class="full campo">
-                        <label for="habilidades">Habilidades</label>
-                        <textarea id="habilidades" placeholder="Describe tus habilidades (opcional)"></textarea>
-                    </div>
-                    <div class="full campo">
-                        <label for="cv">Subir CV</label>
-                        <input type="file" id="cv" accept=".pdf,.doc,.docx">
+                        <label for="matricula">Matrícula</label>
+                        <input type="text" id="matricula" placeholder="Tu matrícula UTZAC">
                     </div>
                 </div>
             </div>
 
-            <!-- Campos para empresas -->
-            <div id="camposEmpresa" class="oculto">
+            <!-- Campos para profesor asesor -->
+            <div id="camposProfesor" class="oculto">
                 <div class="form-grid">
                     <div class="campo">
-                        <label for="correoEmpresa">Correo</label>
-                        <input type="email" id="correoEmpresa" placeholder="correo@empresa.com">
+                        <label for="correoProfesor">Correo institucional</label>
+                        <input type="email" id="correoProfesor" placeholder="correo@utzac.edu.mx">
                     </div>
                     <div class="campo">
-                        <label for="passwordEmpresa">Contraseña</label>
-                        <input type="password" id="passwordEmpresa" placeholder="Contraseña">
+                        <label for="passwordProfesor">Contraseña</label>
+                        <input type="password" id="passwordProfesor" placeholder="Contraseña">
                     </div>
                     <div class="campo">
-                        <label for="nombreEmpresa">Nombre(s) del responsable</label>
-                        <input type="text" id="nombreEmpresa" placeholder="Nombre del responsable">
+                        <label for="nombreProfesor">Nombre(s)</label>
+                        <input type="text" id="nombreProfesor" placeholder="Tu nombre">
                     </div>
                     <div class="campo">
-                        <label for="apellidosEmpresa">Apellidos del responsable</label>
-                        <input type="text" id="apellidosEmpresa" placeholder="Apellidos del responsable">
+                        <label for="apellidosProfesor">Apellidos</label>
+                        <input type="text" id="apellidosProfesor" placeholder="Tus apellidos">
                     </div>
                     <div class="full campo">
-                        <label for="nombreEmpresaRazon">Nombre de empresa</label>
-                        <input type="text" id="nombreEmpresaRazon" placeholder="Razón social o nombre comercial">
-                    </div>
-                    <div class="full campo">
-                        <label for="carrerasAfines">Carreras afines</label>
-                        <input type="text" id="carrerasAfines" placeholder="Ej. TI, Administración">
-                    </div>
-                    <div class="campo">
-                        <label for="direccion">Dirección</label>
-                        <input type="text" id="direccion" placeholder="Dirección de la empresa">
-                    </div>
-                    <div class="campo">
-                        <label for="numVacantes">Número de vacantes</label>
-                        <input type="number" id="numVacantes" min="1" placeholder="¿Cuántas vacantes tienes?">
-                    </div>
-                    <div class="full campo">
-                        <label for="convocatoria">Subir convocatoria</label>
-                        <input type="file" id="convocatoria" accept=".pdf,.doc,.docx">
+                        <label for="carreraProfesor">Carrera en la que asesoras</label>
+                        <select id="carreraProfesor">
+                            <option value="administracion">Administración de empresas</option>
+                            <option value="agricultura">Agricultura</option>
+                            <option value="contaduria">Contaduría</option>
+                            <option value="educacion">Educación</option>
+                            <option value="energia">Energía y Desarrollo Sostenible</option>
+                            <option value="fisioterapia">Fisioterapia</option>
+                            <option value="industrial">Ingeniería Industrial</option>
+                            <option value="mantenimiento">Mantenimiento Industrial</option>
+                            <option value="mecatronica">Mecatrónica</option>
+                            <option value="mineria">Minería</option>
+                            <option value="mercadotecnia">Negocios y Mercadotecnia</option>
+                            <option value="TI">Tecnologías de la Información</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -200,15 +176,15 @@
 
             <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
                 <button class="btn btn-primary btn-block" onclick="registrar()">Registrarse</button>
-                <p style="text-align:center;">¿Ya tienes cuenta? <a href="login.html"><strong>Inicia sesión aquí</strong></a></p>
+                <p style="text-align:center; font-size:13.5px;">¿Ya tienes cuenta? <a href="login.html"><strong>Inicia sesión aquí</strong></a></p>
                 <div id="mensaje" role="status" aria-live="polite"></div>
             </div>
         </div>
     </main>
 
-    <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script src="js/app.js"></script>
     <script>
-        // Preselecciona el rol según el parámetro ?tipo= que envía index.html
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const tipo = params.get('tipo');
@@ -223,7 +199,7 @@
             const tipo = document.getElementById('tipo').value;
             const secciones = {
                 alumno: document.getElementById('camposAlumno'),
-                empresa: document.getElementById('camposEmpresa'),
+                profesor: document.getElementById('camposProfesor'),
                 direccion_carrera: document.getElementById('camposDireccion'),
                 vinculacion: document.getElementById('camposVinculacion'),
             };
@@ -242,17 +218,16 @@
             return '';
         }
 
-        // Reglas de validación por tipo de cuenta: qué campos son obligatorios
         const CAMPOS_POR_TIPO = {
             alumno: {
                 requeridos: ['correoAlumno', 'passwordAlumno', 'nombreAlumno', 'apellidosAlumno'],
                 correo: 'correoAlumno',
                 password: 'passwordAlumno',
             },
-            empresa: {
-                requeridos: ['correoEmpresa', 'passwordEmpresa', 'nombreEmpresa', 'apellidosEmpresa', 'nombreEmpresaRazon'],
-                correo: 'correoEmpresa',
-                password: 'passwordEmpresa',
+            profesor: {
+                requeridos: ['correoProfesor', 'passwordProfesor', 'nombreProfesor', 'apellidosProfesor'],
+                correo: 'correoProfesor',
+                password: 'passwordProfesor',
             },
             direccion_carrera: {
                 requeridos: ['correoDireccion', 'passwordDireccion', 'nombreDireccion', 'apellidosDireccion', 'carreraAfin'],
@@ -297,7 +272,7 @@
             }
 
             mensajeEl.classList.add('mensaje-exito');
-            mensajeEl.textContent = '¡Cuenta creada exitosamente!';
+            mensajeEl.textContent = 'Formulario listo — conecta el backend en XAMPP para guardar la cuenta.';
         }
     </script>
 </body>
